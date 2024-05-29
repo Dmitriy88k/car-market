@@ -1,0 +1,39 @@
+.gridCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 80%;
+  margin: 0 auto 10rem auto ;
+}
+
+.cardsHeader {
+  text-align: center;
+  margin: 4rem 0;
+  font-size: 2.5rem;
+  font-family: sans-serif;
+}
+
+.card {
+  border: 2px solid #FA4428;
+  text-align: center;
+  width: 15rem;
+  border-radius: 12px;
+  padding: 1.2rem 0;
+}
+
+.card img {
+  min-height: 3.2rem;
+}
+
+.card p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: .8rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  font-family: "Quicksand";
+}
+
+

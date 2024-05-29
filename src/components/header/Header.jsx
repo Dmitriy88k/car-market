@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css'
-import IconImg from "../../assets/logo2.png"
+import IconImg from "../../assets/logo.png"
 
 const Header = () => {
   const {pathname} = useLocation();

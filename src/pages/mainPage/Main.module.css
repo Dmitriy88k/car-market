@@ -1,0 +1,35 @@
+.mainContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 13rem;
+}
+
+
+.header {
+  font-size: 1.2rem;
+  margin-top: 5rem;
+  font-weight: 600;
+}
+
+.subheader {
+  font-size: 3.5rem;
+  margin: 1rem 0;
+  font-family: sans-serif;
+}
+
+.paragraph {
+  font-weight: 400;
+}
+
+@media (max-width: 920px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+
+  .mainText {
+    text-align: center;
+  }
+
+}

@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+  font-weight: 800;
 }
 
 .navContainer {
@@ -11,9 +12,11 @@
   align-items: center;
 }
 
+
+
 .logo img{
-  width: 325px;
-  border-radius: 15px;
+  width: 160px;
+  margin-right: 2rem;
 }
 
 .navLinks {
@@ -24,12 +27,12 @@
 
 .navLinkItem {
   margin-right: 2rem;
+  padding-bottom: .5rem;
 }
 
 .navLink {
   text-decoration: none;
   color: #000;
-  position: relative;
 }
 
 
@@ -42,7 +45,7 @@
 .authLinks {
   display: flex;
   align-items: center;
-  
+  padding-bottom: .8rem;
 }
 
 .authLink {
@@ -66,7 +69,6 @@
 }
 
 .change .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-5px, 6px);
   transform: rotate(-45deg) translate(-5px, 6px);
 }
 
@@ -75,7 +77,6 @@
 }
 
 .change .bar3 {
-  -webkit-transform: rotate(45deg) translate(-5px, -6px);
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
@@ -84,7 +85,7 @@
   flex-direction: column;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
   .navLinks,
   .authLinks {
     display: none;
@@ -107,7 +108,8 @@
   }
 
   .navbar {
-    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .navLinkItem {
