@@ -5,6 +5,7 @@ import DownloadApp from '../../components/downloadApp/DownloadApp';
 import Consultation from '../../components/consultation/consultation'
 import mainImg from "../../assets/red-mercedes.png"
 import styles from '../mainPage/Main.module.css'
+import { app, analytics } from './firebase';
 
 const MainPage = () => {
   return (
@@ -20,9 +21,8 @@ const MainPage = () => {
         <div><img src={mainImg} alt="" /></div>
       </div>
       <Cards />
-      <div></div>
-      <DownloadApp />
       <Consultation />
+      <DownloadApp />
     </div>
   );
 };

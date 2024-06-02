@@ -6,13 +6,13 @@ const Consultation = () => {
   return (
     <div className={styles.consultationSection}>
       <div className={styles.consultationText}>
-        <h5>Need professional advice about car?</h5>
-        <p>Our specialist contact you to help make best choice. It's free!</p>
+        <h5>Need professional advice about a car?</h5>
+        <p>Our specialist will contact you to help you to make the best choice. It's  absolutely free!</p>
       </div>
 
       <div className={styles.consultationForm}>
           <input type="text" placeholder="Your name"/>
-          <input type="number" placeholder="Phone number"/>
+          <input type="tel" placeholder="Phone number" className={styles.telInput}/>
           <button>GET FREE COUNSULTATION</button>
       </div>
     </div>
