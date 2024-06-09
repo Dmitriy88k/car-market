@@ -1,4 +1,4 @@
-.consultationSection {
+.consultation_section {
   background-color: #333645;
   width: 100%;
   margin: 0 auto;
@@ -11,33 +11,33 @@
   margin-bottom: 9rem;
 }
 
-.consultationText h5 {
+.consultation_text h5 {
   color: white;
   font-size: 1.8rem;
 }
 
-.consultationText p {
-  color: #FF4E1F;
+.consultation_text p {
+  color: #ff4e1f;
   margin-bottom: 2rem;
 }
 
-.consultationForm {
+.consultation_form {
   display: flex;
 }
 
-.consultationForm input {
-  padding: 0 .5rem;
+.consultation_form input {
+  padding: 0 0.5rem;
   border-radius: 5px;
   border: none;
 }
 
-.telInput {
+.telephone_input {
   margin: 0 10px;
 }
 
-.consultationForm button {
-  font-size: .7rem;
-  background: #FF4E1F;
+.consultation_form button {
+  font-size: 0.7rem;
+  background: #ff4e1f;
   color: white;
   border-radius: 25px;
   border: none;
