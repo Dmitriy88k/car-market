@@ -6,6 +6,8 @@ import { app } from "../../firebase";
 import React, { useState } from "react";
 import styles from "../login/Login.module.css";
 import IconImg from "../../assets/logo.png";
+import { Link } from "react-router-dom";
+
 
 const auth = getAuth(app);
 
@@ -52,7 +54,10 @@ const Login = () => {
       </div>
       <div className={styles.login_right_side}>
         <div className={styles.login_input_title}>
-          <img src={IconImg} alt="" />
+          <Link to="/">
+            <img src={IconImg} alt="" />
+          </Link>
+          
           <h2>Sign In to your account</h2>
           <p>Enter your details to proceed further</p>
         </div>
@@ -74,8 +79,20 @@ const Login = () => {
             />
           </div>
 
-          <button>Sign In</button>
+          <button><span>Sign In</span></button>
         </form>
+        <div className={styles.login_or_option}>
+          <p>OR</p>
+        </div>
+        <div className={styles.google_btn}>
+          <button>Sign Up with Google</button>
+        </div>
+        <div className={styles.facebook_btn}>
+          <button>Sign Up with Facebook</button>
+        </div>
+        <div className={styles.twitter_btn}>
+          <button>Sign Up with Twitter</button>
+        </div>
       </div>
     </div>
   );
