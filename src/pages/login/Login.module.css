@@ -3,7 +3,6 @@
   margin: 0 auto;
   height: 100vh;
   display: flex;
-
 }
 
 .login_left_side {
@@ -18,21 +17,21 @@
 }
 
 .login_left_side::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.65);
-  border-radius: 25px; 
-  z-index: 1; 
+  border-radius: 25px;
+  z-index: 1;
 }
 
 .login_left_header {
   position: absolute;
   font-size: 1.5rem;
-  width: 70%;
+  width: 450px;
   top: 10%;
   left: 10%;
 }
@@ -63,24 +62,24 @@
 }
 
 .login_left_bottom button {
-  padding: .2rem 1.5rem;
+  padding: 0.2rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   border-radius: 5px;
   font-weight: 400;
-  background: #FA4428;
+  background: #fa4428;
   color: whitesmoke;
-  transition: background 0.3s ease-in-out,  transform 0.2s ease-in-out;
-  outline: none; 
-  border: none; 
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  outline: none;
+  border: none;
 }
 
 .login_left_bottom button:focus,
 .login_left_bottom button:active {
-  outline: none; 
-  border: none; 
+  outline: none;
+  border: none;
 }
 
 .login_left_bottom button:hover {
@@ -88,9 +87,8 @@
 }
 
 .login_left_bottom button:active {
-  transform: scale(.9); 
+  transform: scale(0.9);
 }
-
 
 .login_right_side {
   width: 50%;
@@ -109,7 +107,7 @@
   margin-bottom: 1.5rem;
 }
 
-.login_input_title img{
+.login_input_title img {
   width: 9rem;
   margin-bottom: 1rem;
   transition: transform 0.3s ease;
@@ -123,11 +121,9 @@
   font-size: 2rem;
 }
 
-.login_input_title p{
+.login_input_title p {
   color: darkgrey;
-  font-size: .8rem;
-
-
+  font-size: 0.8rem;
 }
 
 .login_form {
@@ -142,25 +138,25 @@
   margin-bottom: 10px;
   border-radius: 10px;
   border: 1px solid grey;
-  outline: none; 
+  outline: none;
 }
 
 .login_form button {
   width: 100%;
   height: 2.5rem;
   margin-top: 10px;
-  background: #FA4428;
+  background: #fa4428;
   color: white;
   border-radius: 10px;
-  transition: background 0.3s ease-in-out,  transform 0.2s ease-in-out;
-  outline: none; 
-  border: none; 
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  outline: none;
+  border: none;
 }
 
 .login_form button:focus,
 .login_form button:active {
-  outline: none; 
-  border: none; 
+  outline: none;
+  border: none;
 }
 
 .login_form button:hover {
@@ -168,14 +164,14 @@
 }
 
 .login_form button:active {
-  transform: scale(.9); 
+  transform: scale(0.9);
 }
 
 .login_or_option {
   text-align: center;
   position: relative;
   margin: 2rem 0 1rem 0;
-  width:50%;
+  width: 50%;
 }
 
 .login_or_option p {
@@ -200,36 +196,82 @@
   right: 0%;
 }
 
-.google_btn, .facebook_btn, .twitter_btn {
+.google_btn,
+.facebook_btn,
+.twitter_btn {
   width: 50%;
-  margin-top: .7rem;
+  margin-top: 0.7rem;
 }
 
-.google_btn button, .facebook_btn button, .twitter_btn button{
+.google_btn button,
+.facebook_btn button,
+.twitter_btn button {
   color: darkgrey;
   width: 100%;
   border: 1px solid darkgrey;
+  transition: color 0.5s ease-out, transform 0.3s ease-out;
+}
+
+.google_btn button:hover,
+.facebook_btn button:hover,
+.twitter_btn button:hover {
+  color: #fa4428;
+  outline: none;
+  border: 1px solid darkgrey;
+}
+
+.google_btn button:active,
+.facebook_btn button:active,
+.twitter_btn button:active,
+.google_btn button:focus,
+.facebook_btn button:focus,
+.twitter_btn button:focus {
+  border: 1px solid darkgrey;
+  outline: none;
+}
+
+.google_btn button:active,
+.facebook_btn button:active,
+.twitter_btn button:active {
+  transform: scale(0.9);
 }
 
 .google_btn button {
   background: url("../../assets/google-icon.png");
-  background-size:1.5rem;
+  background-size: 1.5rem;
   background-repeat: no-repeat;
   background-position: 1rem center;
 }
 
 .facebook_btn button {
   background: url("../../assets/facebook-icon.png");
-  background-size:1.5rem;
+  background-size: 1.5rem;
   background-repeat: no-repeat;
   background-position: 1rem center;
 }
 
 .twitter_btn button {
   background: url("../../assets/twitter-icon.png");
-  background-size:1.5rem;
+  background-size: 1.5rem;
   background-repeat: no-repeat;
   background-position: 1rem center;
 }
 
 
+@media (max-width: 1100px) {
+  .login_page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .login_left_side {
+    display: none;
+  }
+  
+}
+
+@media (max-width: 920px) {
+
+}

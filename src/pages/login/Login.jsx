@@ -1,7 +1,4 @@
-import {
-  getAuth,
-  /*createUserWithEmailAndPassword,*/ signInWithEmailAndPassword,
-} from "firebase/auth";
+import {getAuth, /*createUserWithEmailAndPassword,*/ signInWithEmailAndPassword,} from "firebase/auth";
 import { app } from "../../firebase";
 import React, { useState } from "react";
 import styles from "../login/Login.module.css";
@@ -48,7 +45,9 @@ const Login = () => {
             <p>You don't have an account?</p>
           </div>
           <div className={styles.login_left_bottom_button}>
-            <button>Sign Up</button>
+            <Link to="/signup">
+              <button>Sign Up</button>
+            </Link>
           </div>
         </div>
       </div>
