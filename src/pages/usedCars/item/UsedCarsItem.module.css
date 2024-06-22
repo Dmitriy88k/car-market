@@ -1,0 +1,7 @@
+.used_cars_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 13rem;
+}

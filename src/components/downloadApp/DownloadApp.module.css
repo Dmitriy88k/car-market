@@ -1,37 +1,37 @@
-.downloadSection {
+.download_section {
   width: 90%;
   border: 0px solid black;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 3rem;
+  padding: 3rem 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 10rem;
 }
 
-.carPhone img {
+.car_phone img {
   width: 15rem;
 }
 
-.downloadText {
+.download_text {
   display: flex;
   justify-content: center;
   padding: 0 0 0 3rem ;
   flex-direction: column;
 }
 
-.downloadText h1 {
+.download_text h1 {
   font-size: 2.5rem;
   font-family: sans-serif;
 }
 
-.downloadText h2 {
+.download_text h2 {
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.downloadText p {
+.download_text p {
   margin-top: 2rem;
   max-width: 45rem;
 }
@@ -40,55 +40,59 @@
   color: red;
 }
 
-.downloadIcons {
+.download_icons {
   margin-top: 3rem;
 }
 
-.downloadIcons img {
+.download_icons img {
   margin-right: 1rem;
   width: 8rem;
-  
+  transition: transform 0.11s ease-in-out;
+}
+
+.download_icons img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 @media (max-width: 875px) {
-  .downloadSection {
+  .download_section {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    
   }
 
-  .carPhone {
+  .car_phone {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .downloadText {
+  .download_text {
     margin-top: 4rem;
     text-align: center;
     padding: 0 3rem 0 3rem ;
   }
 
-  .downloadIcons {
+  .download_icons {
     display: flex;
     justify-content: space-around;
   }
 
-  .downloadIcons img {
+  .download_icons img {
     margin-right: 0rem;
     width: 10rem;
   }
 }
 
 @media (max-width: 600px) {
-  .downloadIcons {
+  .download_icons {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
   }
 
-  .downloadIcons img {
+  .download_icons img {
     margin: 0;
   }
 }
