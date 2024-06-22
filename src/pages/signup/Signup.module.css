@@ -1,3 +1,283 @@
-.header {
-  color: red;
+.signup_page {
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+}
+
+.signup_left_side {
+  position: relative;
+  width: 50%;
+  background: url("../../../src/assets/car-2.jpg");
+  background-size: cover;
+  background-position: center;
+  margin: 15px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.signup_left_side::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 25px;
+  z-index: 1;
+}
+
+.signup_left_header {
+  position: absolute;
+  font-size: 1.5rem;
+  width: 300px;
+  top: 10%;
+  left: 10%;
+}
+
+.signup_left_header h1 {
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.signup_left_bottom {
+  display: flex;
+  padding: 0 3rem;
+  justify-content: space-between;
+  align-items: center;
+  background: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8vh;
+  z-index: 2;
+}
+
+.signup_left_bottom_text p {
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.signup_left_bottom button {
+  padding: 0.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 5px;
+  font-weight: 400;
+  background: #fa4428;
+  color: whitesmoke;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  outline: none;
+  border: none;
+}
+
+.signup_left_bottom button:focus,
+.signup_left_bottom button:active {
+  outline: none;
+  border: none;
+}
+
+.signup_left_bottom button:hover {
+  background: #d42105;
+}
+
+.signup_left_bottom button:active {
+  transform: scale(0.9);
+}
+
+.signup_right_side {
+  width: 50%;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup_input_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  
+}
+
+.signup_input_title img {
+  width: 9rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.signup_input_title img:hover {
+  transform: scale(1.2);
+}
+
+.signup_input_title h2 {
+  font-size: 2rem;
+}
+
+.signup_input_title p {
+  color: darkgrey;
+  font-size: 0.8rem;
+}
+
+.signup_form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.signup_form input {
+  width: 100%;
+  height: 2rem;
+  padding: 1rem;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  outline: none;
+}
+
+.terms_and_conditions {
+  display: flex;
+  align-items: flex-start;
+  margin: .5rem 0 1rem 0;
+}
+
+.terms_and_conditions input {
+  margin-right: 10px;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.terms_and_conditions label {
+  font-size: 1rem;
+  line-height: 1.2rem;
+}
+
+.terms_and_conditions a {
+  color: #fa4428;
+  text-decoration: none;
+}
+
+.terms_and_conditions a:hover {
+  text-decoration: underline;
+}
+
+.signup_form button {
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 10px;
+  background: #fa4428;
+  color: white;
+  border-radius: 10px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  outline: none;
+  border: none;
+}
+
+.signup_form button:focus,
+.signup_form button:active {
+  outline: none;
+  border: none;
+}
+
+.signup_form button:hover {
+  background: #d42105;
+}
+
+.signup_form button:active {
+  transform: scale(0.9);
+}
+
+@media (max-width: 1100px) {
+  .signup_page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .signup_left_side {
+    display: none;
+  }
+
+  .signup_right_side {
+    position: relative;
+    margin: 0;
+    background: url("../../assets/car-1.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .signup_right_side::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1;
+  }
+
+    .signup_input_title, 
+    .signup_form {
+      position: relative;
+      z-index: 2;
+      width: 600px;
+    }
+  
+    .signup_input_title h2, 
+    .signup_input_title p, 
+    .signup_form input, 
+    .signup_form button{
+      z-index: 2; 
+      width: 600px;
+    }
+
+    .signup_input_title img {
+      display: none;
+    }
+
+    .signup_input_title h2 {
+      color: white;
+      font-size: 3.5rem;
+      text-align: center;
+    }
+
+    .signup_input_title p {
+     text-align: center;
+     font-size: 1rem; 
+    }
+}
+
+@media (max-width: 620px) {
+  .signup_input_title, 
+  .signup_form {
+    width: 350px;
+    
+  }
+
+  .signup_input_title h2, 
+  .signup_input_title p, 
+  .signup_form input, 
+  .signup_form button{
+    width: 350px;
+  }
+
+  .signup_input_title h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
 }

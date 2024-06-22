@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from '../src/pages/mainPage/Main';
 import UsedCars from '../src/pages/usedCars/view/UsedCars';
 import Login from './pages/login/Login';
-import Signup from './pages/signup/Signup';
+import Signup from './pages/signup/signup';
 import './App.css';
 import "./firebase";
 

@@ -325,6 +325,7 @@
     .login_input_title h2 {
       color: white;
       font-size: 3.5rem;
+      text-align: center;
     }
 
     .login_input_title p {
