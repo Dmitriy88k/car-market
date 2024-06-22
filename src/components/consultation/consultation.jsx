@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './consultation.module.css';
-import IconImg from "../../assets/logo.png"
+
 
 const Consultation = () => {
   return (
@@ -12,7 +12,7 @@ const Consultation = () => {
 
       <div className={styles.consultationForm}>
           <input type="text" placeholder="Your name"/>
-          <input type="number" placeholder="Phone number"/>
+          <input type="tel" placeholder="Phone number" className={styles.phoneInput}/>
           <button>GET FREE COUNSULTATION</button>
       </div>
     </div>

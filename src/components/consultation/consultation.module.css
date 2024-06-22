@@ -1,7 +1,7 @@
 .consultationSection {
   background-color: #333645;
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,4 +33,8 @@
   background: #FF4E1F;
   color: white;
   border-radius: 0px;
+}
+
+.phoneInput {
+  margin: 0 2rem 0 .5rem;
 }
