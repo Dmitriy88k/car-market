@@ -70,6 +70,18 @@ const Signup = () => {
               type="email"
             />
           </div>
+          <div className={styles.signup_user_info}> 
+            <div className={styles.signup_user_first_name}>
+              <input 
+              placeholder="First name"
+              type="text" />
+            </div>
+            <div className={styles.signup_user_last_name}>
+            <input 
+              placeholder="Last name"
+              type="text" />
+            </div>
+          </div>
           <div className={styles.password_input}>
             <input
               placeholder="Password"
@@ -81,17 +93,15 @@ const Signup = () => {
           <div className={styles.confirm_password_input}>
             <input
               placeholder="Confirm password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
               type="password"
             />
           </div>
           <div className={styles.terms_and_conditions}>
-            <input 
+            <input
               type="checkbox"
               required
             />
-            <label>I agree with the <a href="">terms and conditions</a></label>
+            <label>I agree with the <a href="">Terms & Conditions.</a></label>
           </div>
           
 
