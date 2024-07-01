@@ -1,0 +1,17 @@
+.used_cars_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 50px;
+}
+
+.used_cars_container {
+  width: 75%;
+  padding: 20px;
+}
+
+@media (max-width: 920px) {
+  .used_cars_container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
