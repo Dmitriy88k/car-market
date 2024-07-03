@@ -5,8 +5,11 @@
 }
 
 .used_cars_filter {
-  background: rgba(255, 78, 31, 0.1);;
+  background: rgba(180, 175, 174, 0.1);;
   width: 30%;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 920px) {
