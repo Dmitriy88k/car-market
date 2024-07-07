@@ -1,9 +1,9 @@
 import {getAuth, /*createUserWithEmailAndPassword,*/ signInWithEmailAndPassword,} from "firebase/auth";
 import { app } from "../../firebase";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../login/Login.module.css";
 import IconImg from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const auth = getAuth(app);
@@ -11,6 +11,7 @@ const auth = getAuth(app);
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -33,6 +34,12 @@ const Login = () => {
         console.log(errorCode, errorMessage);
       });
   };
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      navigate('/');
+    }
+  })
 
   return (
     <div className={styles.login_page}>

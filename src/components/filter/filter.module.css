@@ -1,0 +1,48 @@
+.filter_section {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.filters {
+  width: 100%;
+}
+
+.filter_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.toggle_icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.price_filter {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  transition: height 0.3s ease;
+  overflow: hidden;
+}
+
+.input_price {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  margin: 10px 0;
+}
+
+

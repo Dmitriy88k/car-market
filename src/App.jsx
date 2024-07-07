@@ -7,7 +7,6 @@ import Signup from './pages/signup/signup';
 import './App.css';
 import "./firebase";
 
-
 const App = () => {
   return (
     <Router>

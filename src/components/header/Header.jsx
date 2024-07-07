@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import IconImg from "../../assets/logo.png";
+import { auth } from "../../firebase";
+
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -10,6 +12,8 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const isAuthenticated = auth.currentUser;
 
   return (
     <nav className={styles.navbar}>
@@ -75,13 +79,26 @@ const Header = () => {
       </div>
 
       <div className={styles.auth_links}>
-        <Link className={styles.auth_link} to="/login">
-          Login
-        </Link>
-        <span className={styles.separator}> | </span>
-        <Link className={styles.auth_link} to="/signup">
-          Sign Up
-        </Link>
+        {!isAuthenticated && (
+          <>
+            <Link className={styles.auth_link} to="/login">
+              Login
+            </Link>
+            <span className={styles.separator}> | </span>
+            <Link className={styles.auth_link} to="/signup">
+              Sign Up
+            </Link>
+          </>
+        )}
+
+        {isAuthenticated && (
+          <>
+            <Link className={styles.auth_link} to="/login">
+              Profile
+            </Link>
+          </>
+        )}
+
       </div>
     </nav>
   );

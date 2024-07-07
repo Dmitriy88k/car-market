@@ -1,12 +1,18 @@
-.used_cars_container_and_filter {
+.used_cars_list_and_filter {
   display: flex;
+  margin: 0 auto;
   width: 90%;
-  margin: 50px auto 0 auto;
+  margin-top: 25px;
+}
+
+.used_cars_list{
+  display: flex;
+  width: 75%;
 }
 
 .used_cars_filter {
+  width: 25%;
   background: rgba(180, 175, 174, 0.1);;
-  width: 30%;
   margin-top: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
