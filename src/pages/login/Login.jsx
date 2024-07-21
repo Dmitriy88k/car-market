@@ -1,4 +1,4 @@
-import {getAuth, /*createUserWithEmailAndPassword,*/ signInWithEmailAndPassword,} from "firebase/auth";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import { app } from "../../firebase";
 import React, { useEffect, useState } from "react";
 import styles from "../login/Login.module.css";
@@ -27,6 +27,11 @@ const Login = () => {
 
         const user = userCredential.user;
         console.log(user);
+
+        const accessToken = user.accessToken;
+        localStorage.setitem('accessToken', accessToken);
+
+        navigate('/');
       })
       .catch((error) => {
         const errorCode = error.code;

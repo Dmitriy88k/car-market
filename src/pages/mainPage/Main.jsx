@@ -11,7 +11,6 @@ import styles from "../mainPage/Main.module.css";
 const MainPage = () => {
   return (
     <div>
-      <Header />
       <div className={styles.main_container}>
         <div className={styles.main_text}>
           <h1 className={styles.header}>Used Cards for Sale</h1>

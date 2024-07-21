@@ -1,19 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import IconImg from "../../assets/logo.png";
-import { auth } from "../../firebase";
+import { app, db } from "../../firebase";
+import { getAuth } from "firebase/auth";
+import {collection, getDocs, query, where} from "firebase/firestore";
+
+
+async function getDatav2(uid) {
+  const q = query(collection(db, "users"), where("uid", "==", uid))
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs[0].data()
+}
 
 
 const Header = () => {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState();
+  const [profile, setProfile] = useState();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const isAuthenticated = auth.currentUser;
+  useEffect(() => {
+    getAuth(app).authStateReady().then(() => {
+      setCurrentUser(getAuth(app).currentUser)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!currentUser) return
+    getDatav2(currentUser.uid).then(data => {
+      setProfile(data);
+    })
+  },[currentUser])
+
+  console.log(profile)
+
+  const isAuthenticated = !!currentUser;
 
   return (
     <nav className={styles.navbar}>
@@ -94,7 +120,12 @@ const Header = () => {
         {isAuthenticated && (
           <>
             <Link className={styles.auth_link} to="/login">
-              Profile
+              {!profile && "Profile"}
+              {profile && 
+                <div className={styles.profile_section}>
+                  <img src={profile.picture} alt="" />
+                  <span>{profile.name}</span>
+                </div>}
             </Link>
           </>
         )}
