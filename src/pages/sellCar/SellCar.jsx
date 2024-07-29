@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
 import styles from "../sellCar/SellCar.module.css";
 import Malibu from "../../assets/chevrolet_malibu.png";
+import Cloud from "../../assets/cloud.png";
 import Footer from "../../components/footer/footer";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const vehicleOptions = [
   { value: "", label: "Vehicle type" },
@@ -33,10 +35,11 @@ const SellCar = () => {
   const [carModel, setCarModel] = useState("");
   const [carMileage, setCarMileage] = useState("");
   const [carPrice, setCarPrice] = useState("");
-  const [carImage, setCarImage] = useState(null);
+  const [carImages, setCarImages] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]); // Added this state
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
-  const fileInputRef = useRef(null); 
+  const fileInputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,18 +47,20 @@ const SellCar = () => {
     const numericPrice = Number(carPrice.replace(/[^0-9.-]+/g, ""));
     const numericMileage = Number(carMileage.replace(/[^0-9.-]+/g, ""));
 
-    if (!carImage) {
+    if (carImages.length === 0) {
       setErrors({ image: "Please upload an image of the car" });
       return;
     }
 
     try {
-      const imageRef = ref(storage, `images/${carImage.name}`);
-      await uploadBytes(imageRef, carImage);
-      const imageUrl = await getDownloadURL(imageRef);
-      console.log("Image uploaded, URL: ", imageUrl);
-      
-
+      const imageUrls = await Promise.all(
+        carImages.map(async (image) => {
+          const imageRef = ref(storage, `images/${image.name}`);
+          await uploadBytes(imageRef, image);
+          const imageUrl = await getDownloadURL(imageRef);
+          return imageUrl;
+        })
+      );
 
       const docRef = await addDoc(collection(db, "listings"), {
         type: carType,
@@ -64,7 +69,7 @@ const SellCar = () => {
         model: carModel,
         mileage: numericMileage,
         price: numericPrice,
-        imageUrl: imageUrl,
+        images: imageUrls,
       });
       console.log("Document written with ID: ", docRef.id);
 
@@ -76,11 +81,11 @@ const SellCar = () => {
       setCarPrice("");
       setErrors({});
       setIsSubmitted(true);
-      setCarImage(null);
-
+      setCarImages([]);
+      setImagePreviews([]);
 
       if (fileInputRef.current) {
-        fileInputRef.current.value = null; 
+        fileInputRef.current.value = null;
       }
 
     } catch (e) {
@@ -115,13 +120,49 @@ const SellCar = () => {
   };
 
   const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setCarImage(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    const totalFiles = files.length + carImages.length;
+
+    if (totalFiles > 5) {
+      setErrors({ image: "You can only upload a maximum of 5 images" });
+      return;
     }
+
+    setCarImages((prevImages) => [...prevImages, ...files]);
+
+    const newPreviews = files.map(file => {
+      const reader = new FileReader();
+      return new Promise((resolve) => {
+        reader.onload = (event) => resolve(event.target.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(newPreviews).then((urls) => {
+      setImagePreviews((prevPreviews) => [...prevPreviews, ...urls]);
+      setErrors({});
+    });
   };
 
   const handleOkClick = () => {
     setIsSubmitted(false);
+  };
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const reorderedImages = Array.from(carImages);
+    const [removed] = reorderedImages.splice(result.source.index, 1);
+    reorderedImages.splice(result.destination.index, 0, removed);
+
+    const reorderedPreviews = Array.from(imagePreviews);
+    const [removedPreview] = reorderedPreviews.splice(result.source.index, 1);
+    reorderedPreviews.splice(result.destination.index, 0, removedPreview);
+
+    setCarImages(reorderedImages);
+    setImagePreviews(reorderedPreviews);
   };
 
   return (
@@ -207,22 +248,57 @@ const SellCar = () => {
             required
           />
 
+          <div className={styles.image_previews}>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="images">
+                {(provided) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {carImages.map((image, index) => (
+                      <Draggable key={index} draggableId={index.toString()} index={index}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <p className={styles.image_name}>{image.name}</p>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+
+          <button
+            type="button"
+            className={styles.upload_button}
+            onClick={() => fileInputRef.current.click()}
+          >
+            <img src={Cloud} alt="" />
+            Upload Images
+          </button>
+
           <input
             type="file"
-            className={styles.vehicle_image}
+            className={styles.hidden_file_input}
+            ref={fileInputRef}
             onChange={handleImageChange}
-            required
+            multiple
+            style={{ display: "none" }}
           />
+          
+          {errors.image && <p className={styles.error_message}>{errors.image}</p>}
 
-          {errors.image && (
-            <p className={styles.error_message}>{errors.image}</p>
-          )}
-
-          <button className={styles.submit_button} type="submit">
+          <button type="submit" className={styles.submit_button}>
             Submit
           </button>
         </form>
       </div>
+
       <Footer />
     </div>
   );

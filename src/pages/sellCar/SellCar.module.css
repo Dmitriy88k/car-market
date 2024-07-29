@@ -40,7 +40,7 @@
 
 .success_message {
   width: 30%;
-  height: 60vh;
+  height: 70vh;
   background:rgb(85, 1, 85);
   border-radius: 15px;
   color: white;
@@ -110,14 +110,58 @@ form input {
   margin-bottom: 15px;
 }
 
-.submit_button {
-  background-color: rgb(85, 1, 85);
+.hidden_fule_input {
+  display: none;
+}
+
+.upload_button {
+  background-color: rgb(156, 10, 156);
   color: white;
-  width: 200px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+
+.upload_button:active {
+  border: none;
+  outline: none;
+}
+
+.upload_button:focus {
+  border: none;
+  outline: none;
+}
+
+.upload_button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.submit_button {
+  border: 1px solid rgb(136, 132, 132);
+  color: rgb(156, 10, 156);
+  width: 250px;
+  font-weight: 400;
   margin-top: 15px;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.submit_button:hover {
+  color: white;
+  background-color: rgb(156, 10, 156);
+  outline: none;
+  border: none;
+}
+
+.submit_button:active {
+  outline: none;
+  border: none;
 }
 
 .submit_button:active {
   transform: scale(0.9)
 }
+
+
