@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../components/header/Header";
 import Trending from "../../components/trending/Tredning"
 import Cards from "../../components/typeCarCards/Cards";
 import DownloadApp from "../../components/downloadApp/DownloadApp";

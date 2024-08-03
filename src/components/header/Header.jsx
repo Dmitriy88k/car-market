@@ -107,13 +107,13 @@ const Header = () => {
       <div className={styles.auth_links}>
         {!isAuthenticated && (
           <>
-            <Link className={styles.auth_link} to="/login">
+            <a href="/login" className={styles.auth_link} target="_blank" rel="noopener noreferer"> 
               Login
-            </Link>
+            </a>
             <span className={styles.separator}> | </span>
-            <Link className={styles.auth_link} to="/signup">
+            <a href="/signup" className={styles.auth_link} target="_blank" rel="noopener noreferer"> 
               Sign Up
-            </Link>
+            </a>
           </>
         )}
 

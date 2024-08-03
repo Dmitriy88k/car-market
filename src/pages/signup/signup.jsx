@@ -61,47 +61,57 @@ const Signup = () => {
           <h2>Tell us about yourself</h2>
           <p>Enter your details to proceed further</p>
         </div>
-        <form onSubmit={onSubmit} className={styles.signup_form}>
-          <div className={styles.email_input}>
-            <input
-              placeholder="Email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              type="email"
-            />
-          </div>
+        <form onSubmit={onSubmit} className={styles.signup_form}>   
+          <input className={styles.signup_inputs}
+            placeholder="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            type="email"
+          />
+
           <div className={styles.signup_user_info}> 
-            <div className={styles.signup_user_first_name}>
-              <input 
+
+            <input 
               placeholder="First name"
-              type="text" />
-            </div>
-            <div className={styles.signup_user_last_name}>
+              type="text" 
+              className={styles.signup_user_first_name}
+            />
+   
+  
             <input 
               placeholder="Last name"
-              type="text" />
-            </div>
-          </div>
-          <div className={styles.password_input}>
-            <input
-              placeholder="Password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              type="password"
+              type="text" 
+              className={styles.signup_user_last_name}
             />
           </div>
-          <div className={styles.confirm_password_input}>
-            <input
-              placeholder="Confirm password"
-              type="password"
-            />
-          </div>
+
+          <input
+            placeholder="Password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            type="password"
+            className={styles.signup_inputs}
+          />
+
+          <input
+            placeholder="Confirm password"
+            type="password"
+            className={styles.signup_inputs}
+          />
+
           <div className={styles.terms_and_conditions}>
+
             <input
               type="checkbox"
               required
             />
-            <label>I agree with the <a href="">Terms & Conditions.</a></label>
+
+            <div>
+              <p>
+              I agree with the <a href="">Terms & Conditions.</a>
+              </p>
+            </div>
+            
           </div>
           
 

@@ -127,37 +127,36 @@
   font-size: 0.8rem;
 }
 
-.signup_form {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.signup_form input {
-  width: 100%;
-  height: 2rem;
-  padding: 1rem;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border: 1px solid grey;
-  outline: none;
-}
-
 .signup_user_info {
-  display: flex;
   width: 100%;
+}
+
+.signup_user_first_name {
+  width: 100%;
+  padding: 2px 8px;
+}
+
+.signup_user_last_name {
+  width: 100%;
+  padding: 2px 8px;
+}
+
+.signup_inputs {
+  width: 100%;
+  padding: 2px 8px;
 }
 
 
 .terms_and_conditions {
   display: flex;
-  align-items: flex-start;
-  margin: 0.5rem 0 1rem 0;
+  align-items: center;
 }
 
 .terms_and_conditions input {
+  margin-top: 15px;
   margin-right: 10px;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 20px;
+  height: 20px;
 }
 
 .terms_and_conditions label {

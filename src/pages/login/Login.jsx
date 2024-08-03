@@ -73,24 +73,20 @@ const Login = () => {
           <p>Enter your details to proceed further</p>
         </div>
         <form onSubmit={onSubmit} className={styles.login_form}>
-          <div className={styles.email_input}>
             <input
               placeholder="Email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               type="email"
             />
-          </div>
-          <div className={styles.password_input}>
             <input
               placeholder="Your password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               type="password"
             />
-          </div>
 
-          <button><span>Sign In</span></button>
+            <button><span>Sign In</span></button>
         </form>
         <div className={styles.login_or_option}>
           <p>OR</p>
