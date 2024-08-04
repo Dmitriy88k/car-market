@@ -1,9 +1,10 @@
-import {getAuth, createUserWithEmailAndPassword, /*signInWithEmailAndPassword,*/} from "firebase/auth";
-import { app } from "../../firebase";
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import { app, db } from "../../firebase";
+import { collection, addDoc} from "firebase/firestore";
 import React, { useState } from "react";
 import styles from "../signup/Signup.module.css";
 import IconImg from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const auth = getAuth(app);
@@ -11,28 +12,48 @@ const auth = getAuth(app);
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [error, setError] = useState("");
 
-  const onSubmit = (event) => {
+  const navigate = useNavigate();
+
+
+  const onSubmit = async (event) => {
     event.preventDefault();
+    setError("");
 
-    if (!email || !password) {
+    if (!email || !password || !confirmPassword || !firstName || !lastName) {
+      setError("All fields are required.");
       return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        //save accessToken to LocalStorage and then redirect to the right page
-        //TO-DO REFRESH TOKEN???
+    if (password !== confirmPassword) {
+      setError("Passwords must match.");
+      return;
+    }
 
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Add user data to Firestore
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: `${firstName} ${lastName}`,
+        picture: "https://thumbs.dreamstime.com/b/default-avatar-man-to-social-user-default-avatar-man-to-social-user-vector-illustration-109538855.jpg", // Placeholder or default URL
       });
-  };
+
+      navigate("/login");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(errorMessage);
+      console.log(errorCode, errorMessage);
+    }
+
+  }; 
 
 
   return (
@@ -61,12 +82,16 @@ const Signup = () => {
           <h2>Tell us about yourself</h2>
           <p>Enter your details to proceed further</p>
         </div>
-        <form onSubmit={onSubmit} className={styles.signup_form}>   
+        <form onSubmit={onSubmit} className={styles.signup_form}> 
+          {error && <p className={styles.error_message}>{error}</p>}
+
+
           <input className={styles.signup_inputs}
             placeholder="Email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             type="email"
+            required
           />
 
           <div className={styles.signup_user_info}> 
@@ -75,6 +100,9 @@ const Signup = () => {
               placeholder="First name"
               type="text" 
               className={styles.signup_user_first_name}
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+              required
             />
    
   
@@ -82,6 +110,9 @@ const Signup = () => {
               placeholder="Last name"
               type="text" 
               className={styles.signup_user_last_name}
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              required
             />
           </div>
 
@@ -91,12 +122,16 @@ const Signup = () => {
             onChange={(event) => setPassword(event.target.value)}
             type="password"
             className={styles.signup_inputs}
+            required
           />
 
           <input
             placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
             type="password"
             className={styles.signup_inputs}
+            required
           />
 
           <div className={styles.terms_and_conditions}>
@@ -107,8 +142,8 @@ const Signup = () => {
             />
 
             <div>
-              <p>
-              I agree with the <a href="">Terms & Conditions.</a>
+              <p className={styles.terms_and_conditions_text}>
+                <span>I agree with the</span> <a href="">Terms & Conditions.</a>
               </p>
             </div>
             

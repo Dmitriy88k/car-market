@@ -8,9 +8,20 @@ import {collection, getDocs, query, where} from "firebase/firestore";
 
 
 async function getDatav2(uid) {
-  const q = query(collection(db, "users"), where("uid", "==", uid))
-  const querySnapshot = await getDocs(q);
-  return querySnapshot.docs[0].data()
+  try {
+    const q = query(collection(db, "users"), where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      return querySnapshot.docs[0].data();
+    } else {
+      console.error("No user found with UID:", uid);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return null;
+  }
 }
 
 
@@ -24,20 +35,25 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
+ 
   useEffect(() => {
-    getAuth(app).authStateReady().then(() => {
-      setCurrentUser(getAuth(app).currentUser)
-    })
-  }, [])
+    const auth = getAuth(app);
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+
+    return () => unsubscribe(); 
+  }, []);
 
   useEffect(() => {
-    if (!currentUser) return
-    getDatav2(currentUser.uid).then(data => {
+    if (!currentUser) return;
+
+    setTimeout(async () => {
+      const data = await getDatav2(currentUser.uid);
       setProfile(data);
-    })
-  },[currentUser])
+    }, 1000); // Delay for 1 second
+  }, [currentUser]);
 
-  console.log(profile)
 
   const isAuthenticated = !!currentUser;
 

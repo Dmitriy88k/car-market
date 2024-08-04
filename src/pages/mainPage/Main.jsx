@@ -21,7 +21,7 @@ const MainPage = () => {
             Used listings include a description!
           </p>
         </div>
-        <div>
+        <div className={styles.red_mercedes_picture}>
           <img src={mainImg} alt="" />
         </div>
       </div>

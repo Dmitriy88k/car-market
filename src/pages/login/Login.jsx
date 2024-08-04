@@ -29,7 +29,7 @@ const Login = () => {
         console.log(user);
 
         const accessToken = user.accessToken;
-        localStorage.setitem('accessToken', accessToken);
+        localStorage.setItem('accessToken', accessToken);
 
         navigate('/');
       })
@@ -44,7 +44,7 @@ const Login = () => {
     if (auth.currentUser) {
       navigate('/');
     }
-  })
+  },[auth.currentUser, navigate]);
 
   return (
     <div className={styles.login_page}>

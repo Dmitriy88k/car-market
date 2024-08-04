@@ -164,4 +164,24 @@ form input {
   transform: scale(0.9)
 }
 
+@media (max-width: 870px) {
+  .sell_car_header {
+    width: 90%;
+  }
+
+  .sell_car_header h1{
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 625px) {
+  .sell_car_header {
+    width: 100%;
+  }
+
+  .sell_car_header h1{
+    font-size: 2.1rem;
+  }
+}
+
 

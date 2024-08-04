@@ -7,6 +7,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {useNavigate} from "react-router-dom";
 
 const vehicleOptions = [
   { value: "", label: "Vehicle type" },
@@ -22,6 +23,7 @@ const vehicleOptions = [
 ];
 
 const currentYear = new Date().getFullYear();
+
 
 const vehicleYear = [];
 for (let year = currentYear; year >= 1900; year--) {
@@ -40,6 +42,8 @@ const SellCar = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const fileInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -146,6 +150,7 @@ const SellCar = () => {
 
   const handleOkClick = () => {
     setIsSubmitted(false);
+    navigate("/used-cars");
   };
 
   const onDragEnd = (result) => {

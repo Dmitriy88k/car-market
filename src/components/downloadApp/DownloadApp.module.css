@@ -92,7 +92,16 @@
     gap: 2rem;
   }
 
+  .download_text h1 {
+    font-size: 2rem;
+    font-family: sans-serif;
+    margin-bottom: 1rem;
+  }
+
   .download_icons img {
     margin: 0;
+    width: 8rem;
   }
+
+
 }
