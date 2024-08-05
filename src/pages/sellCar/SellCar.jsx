@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "../sellCar/SellCar.module.css";
 import Malibu from "../../assets/chevrolet_malibu.png";
 import Cloud from "../../assets/cloud.png";
@@ -7,7 +7,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import {useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 const vehicleOptions = [
   { value: "", label: "Vehicle type" },
@@ -38,12 +39,20 @@ const SellCar = () => {
   const [carMileage, setCarMileage] = useState("");
   const [carPrice, setCarPrice] = useState("");
   const [carImages, setCarImages] = useState([]);
-  const [imagePreviews, setImagePreviews] = useState([]); // Added this state
+  const [imagePreviews, setImagePreviews] = useState([]); 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
+
+  useEffect(()=> {
+    const auth= getAuth();
+    onAuthStateChanged(auth, (user)=> {
+      setIsLoggedIn(!!user);
+    })
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -188,13 +197,14 @@ const SellCar = () => {
             </div>
           )}
         </div>
-
+        {!isLoggedIn && <p className={styles.login_prompt}>Please log in to submit a listing.</p>}
         <form onSubmit={handleSubmit}>
           <select
             className={styles.select_type_car}
             value={carType}
             onChange={(e) => setCarType(e.target.value)}
             required
+            disabled={!isLoggedIn}
           >
             {vehicleOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -208,6 +218,7 @@ const SellCar = () => {
             value={carYear}
             onChange={(e) => setCarYear(e.target.value)}
             required
+            disabled={!isLoggedIn}
           >
             <option value="">Year</option>
             {vehicleYear.map((year) => (
@@ -224,6 +235,7 @@ const SellCar = () => {
             value={carMake}
             onChange={(e) => setCarMake(e.target.value)}
             required
+            disabled={!isLoggedIn}
           />
 
           <input
@@ -233,6 +245,7 @@ const SellCar = () => {
             value={carModel}
             onChange={(e) => setCarModel(e.target.value)}
             required
+            disabled={!isLoggedIn}
           />
 
           <input
@@ -242,6 +255,7 @@ const SellCar = () => {
             value={carMileage}
             onChange={handleMileageChange}
             required
+            disabled={!isLoggedIn}
           />
 
           <input
@@ -251,6 +265,7 @@ const SellCar = () => {
             value={carPrice}
             onChange={handlePriceChange}
             required
+            disabled={!isLoggedIn}
           />
 
           <div className={styles.image_previews}>
@@ -265,6 +280,7 @@ const SellCar = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
+                            
                           >
                             <p className={styles.image_name}>{image.name}</p>
                           </div>
@@ -294,13 +310,15 @@ const SellCar = () => {
             onChange={handleImageChange}
             multiple
             style={{ display: "none" }}
+            disabled={!isLoggedIn}
           />
           
           {errors.image && <p className={styles.error_message}>{errors.image}</p>}
 
-          <button type="submit" className={styles.submit_button}>
+          <button type="submit" className={styles.submit_button} disabled={!isLoggedIn}>
             Submit
           </button>
+          
         </form>
       </div>
 

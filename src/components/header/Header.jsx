@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import IconImg from "../../assets/logo.png";
+import LogOutImg from "../../assets/log-out.png"
 import { app, db } from "../../firebase";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import {collection, getDocs, query, where} from "firebase/firestore";
 
 
@@ -30,19 +31,24 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const [profile, setProfile] = useState();
+  const [auth, setAuth] = useState();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    setAuth(getAuth(app))
+  },[])
+
  
   useEffect(() => {
     const auth = getAuth(app);
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = auth?.onAuthStateChanged(user => {
       setCurrentUser(user);
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe && unsubscribe(); 
   }, []);
 
   useEffect(() => {
@@ -51,7 +57,7 @@ const Header = () => {
     setTimeout(async () => {
       const data = await getDatav2(currentUser.uid);
       setProfile(data);
-    }, 1000); // Delay for 1 second
+    }, 1000); 
   }, [currentUser]);
 
 
@@ -141,8 +147,11 @@ const Header = () => {
                 <div className={styles.profile_section}>
                   <img src={profile.picture} alt="" />
                   <span>{profile.name}</span>
+                  
                 </div>}
             </Link>
+
+            <button onClick={() => signOut(auth)} className={styles.logOut_button}><img src={LogOutImg}/>Log out</button>
           </>
         )}
 

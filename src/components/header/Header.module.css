@@ -102,6 +102,21 @@
   flex-direction: column;
 }
 
+.logOut_button {
+  background: #ffffff;
+  color: #ff4e1f;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  border: 1px solid silver;
+}
+
+.logOut_button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
 @media (max-width: 920px) {
   .nav_links,
   .auth_links {

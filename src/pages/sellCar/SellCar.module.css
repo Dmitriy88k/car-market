@@ -164,6 +164,14 @@ form input {
   transform: scale(0.9)
 }
 
+.login_prompt {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.2rem;
+  color: #ff4e1f;
+  font-weight: 800;
+}
+
 @media (max-width: 870px) {
   .sell_car_header {
     width: 90%;
