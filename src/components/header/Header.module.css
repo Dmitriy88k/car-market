@@ -102,19 +102,67 @@
   flex-direction: column;
 }
 
-.logOut_button {
-  background: #ffffff;
-  color: #ff4e1f;
-  padding: 5px 15px;
-  display: flex;
-  align-items: center;
-  font-weight: 800;
-  border: 1px solid silver;
+.dropdown_menu {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 150px;
 }
 
-.logOut_button img {
-  width: 20px;
+.dropdown_item {
+  padding: 10px 15px;
+  text-align: left;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown_item:hover {
+  background-color: #f1f1f1;
+}
+
+.profile_section {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown_profile {
+  display: flex;
+  align-items: flex-start;
+}
+
+.profile_section img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   margin-right: 10px;
+}
+
+.drop_down_img img{
+ border: none;
+ width: 30px;
+ height: 30px; 
+ margin-left: 10px;
+}
+
+.dropdown_menu button {
+  background: white;
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.dropdown_menu button:hover, .dropdown_menu button:active, .dropdown_menu button:focus {
+  border: none;
+  outline: none;
+  
 }
 
 @media (max-width: 920px) {

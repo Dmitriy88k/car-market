@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import IconImg from "../../assets/logo.png";
-import LogOutImg from "../../assets/log-out.png"
+import DownImg from "../../assets/down.png"
 import { app, db } from "../../firebase";
 import { getAuth, signOut } from "firebase/auth";
 import {collection, getDocs, query, where} from "firebase/firestore";
@@ -32,10 +32,19 @@ const Header = () => {
   const [currentUser, setCurrentUser] = useState();
   const [profile, setProfile] = useState();
   const [auth, setAuth] = useState();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  }
+
+  const handleLogout = () => {
+    signOut(auth);
+  }
 
   useEffect(() => {
     setAuth(getAuth(app))
@@ -141,20 +150,45 @@ const Header = () => {
 
         {isAuthenticated && (
           <>
-            <Link className={styles.auth_link} to="/login">
-              {!profile && "Profile"}
-              {profile && 
-                <div className={styles.profile_section}>
-                  <img src={profile.picture} alt="" />
-                  <span>{profile.name}</span>
-                  
-                </div>}
-            </Link>
+            <div className={styles.profile_section}>
+              <div>
+                <img 
+                  src={profile?.picture || "default-profile-pic.png"} 
+                  alt="" 
+                  onClick={toggleDropdown}  
+                />
+              </div>
+              
+              <div>
+                <span onClick={toggleDropdown} className={styles.dropdown_profile}>
+                  {profile?.name || "Profile"} 
+                  <span className={styles.drop_down_img}>
+                    <img src={DownImg} alt="" />
+                  </span>
+                </span>
+              </div>
+              
 
-            <button onClick={() => signOut(auth)} className={styles.logOut_button}><img src={LogOutImg}/>Log out</button>
+              {dropdownOpen && (
+                <div className={styles.dropdown_menu}>
+                  <Link to="/profile" className={styles.dropdown_item}>
+                    View Profile
+                  </Link>
+                  <Link to="/settings" className={styles.dropdown_item}>
+                    Settings
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className={styles.dropdown_item}
+                  >
+                    Log Out
+                  </button>
+
+                </div>
+              )}
+            </div>
           </>
-        )}
-
+        )}    
       </div>
     </nav>
   );
