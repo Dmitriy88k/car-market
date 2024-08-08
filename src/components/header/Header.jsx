@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import IconImg from "../../assets/logo.png";
@@ -33,6 +33,7 @@ const Header = () => {
   const [profile, setProfile] = useState();
   const [auth, setAuth] = useState();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -68,6 +69,19 @@ const Header = () => {
       setProfile(data);
     }, 1000); 
   }, [currentUser]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if(dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return ()=> {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, []);
 
 
   const isAuthenticated = !!currentUser;
@@ -170,7 +184,7 @@ const Header = () => {
               
 
               {dropdownOpen && (
-                <div className={styles.dropdown_menu}>
+                <div className={styles.dropdown_menu} ref={dropdownRef}>
                   <Link to="/profile" className={styles.dropdown_item}>
                     View Profile
                   </Link>

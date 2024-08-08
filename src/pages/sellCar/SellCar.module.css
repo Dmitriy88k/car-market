@@ -166,10 +166,14 @@ form input {
 
 .login_prompt {
   text-align: center;
-  margin: 15px 0;
+  margin: 25px auto;
+  padding: 5px 0;
   font-size: 1.2rem;
-  color: #ff4e1f;
-  font-weight: 800;
+  color: rgb(255, 255, 255);
+  font-weight: 300;
+  background-color: #ff4e1f;
+  width: 400px;
+  border-radius: 5px;
 }
 
 @media (max-width: 870px) {
