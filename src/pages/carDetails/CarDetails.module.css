@@ -1,0 +1,29 @@
+.car_details_page {
+  width: 100%;
+  margin: 50px auto;
+  background: #F5F5F5;
+  height: 100vh;
+}
+
+.car_details_section {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.main_car_image {
+  width: 600px;
+}
+
+.main_car_image img {
+  width: 300px;
+}
+
+.cars_list {
+  display: flex;
+
+}
+
+.cars_list img {
+  width: 100px;
+}
