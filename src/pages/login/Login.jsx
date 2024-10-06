@@ -1,7 +1,7 @@
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import { app } from "../../firebase";
-import React, { useEffect, useState } from "react";
-import styles from "../login/Login.module.css";
+import { useEffect, useState } from "react";
+import styles from "../login/login.module.css";
 import IconImg from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -44,7 +44,7 @@ const Login = () => {
     if (auth.currentUser) {
       navigate('/');
     }
-  },[auth.currentUser, navigate]);
+  });
 
   return (
     <div className={styles.login_page}>
@@ -54,7 +54,7 @@ const Login = () => {
         </div>
         <div className={styles.login_left_bottom}>
           <div className={styles.login_left_bottom_text}>
-            <p>You don't have an account?</p>
+            <p>You don`&apos;`t have an account?</p>
           </div>
           <div className={styles.login_left_bottom_button}>
             <Link to="/signup">

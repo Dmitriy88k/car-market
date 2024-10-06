@@ -1,12 +1,13 @@
-import { React } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import MainPage from '../src/pages/mainPage/Main';
-import UsedCars from '../src/pages/usedCars/view/UsedCars';
-import Login from './pages/login/Login';
+import MainPage from '../src/pages/mainPage/main';
+import UsedCars from '../src/pages/usedCars/view/usedCars';
+import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
-import SellCar from './pages/sellCar/SellCar';
-import CarDetails from './pages/carDetails/CarDetails'
-import Header from '../src/components/header/Header'
+import SellCar from './pages/sellCar/sellCar';
+import CarDetails from './pages/carDetails/carDetails'
+import Header from '../src/components/header/header'
+import ProfileSettings from './pages/profileSettings/profileSettings'
+import ProfileInfo from './pages/profileInfo/profileInfo'
 import './App.css';
 import "./firebase";
 
@@ -28,6 +29,8 @@ const App = () => {
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/car-details/:id" element={<CarDetails/>}/>
+          <Route path="/profile-settings" element={<ProfileSettings/>}/>
+          <Route path="/profile-info" element={<ProfileInfo/>}/>
         </Routes>
 
       </div>

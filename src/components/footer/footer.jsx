@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./footer.module.css";
 import Instagram from "../../assets/instagram.png";
 import Facebook from "../../assets/facebook.png";
@@ -36,7 +36,7 @@ const Footer = () => {
             <li>New Cars</li>
             <li>Used Cars</li>
             <li>Sell My Car</li>
-            <li>My Car's Value</li>
+            <li>My Car`&apos;`s Value</li>
           </ul>
         </div>
         <div className={styles.column}>

@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './DownloadApp.module.css';
+import styles from './downloadApp.module.css';
 import carPhone from "../../assets/carphone.png";
 import appleIcon from "../../assets/apple.png"
 import googleIcon from "../../assets/google.png"

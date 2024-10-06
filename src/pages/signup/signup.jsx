@@ -1,8 +1,8 @@
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import { app, db } from "../../firebase";
 import { collection, addDoc} from "firebase/firestore";
-import React, { useState } from "react";
-import styles from "../signup/Signup.module.css";
+import { useState } from "react";
+import styles from "../signup/signup.module.css";
 import IconImg from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 

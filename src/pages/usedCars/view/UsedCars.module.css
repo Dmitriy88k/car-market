@@ -1,12 +1,12 @@
 .used_cars_list_and_filter {
   display: flex;
+  gap: 50px;
   margin: 0 auto;
   width: 90%;
   margin-top: 25px;
 }
 
 .used_cars_list{
-  display: flex;
   width: 75%;
 }
 
@@ -23,7 +23,12 @@
     display: none;
   }
 
+  .used_cars_list{
+    width: 100%;
+  }
+
   .used_cars_container_and_filter {
     width: 100%;
+    gap: 0;
   }
 }

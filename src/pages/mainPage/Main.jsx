@@ -1,11 +1,10 @@
-import React from "react";
-import Trending from "../../components/trending/Tredning"
-import Cards from "../../components/typeCarCards/Cards";
-import DownloadApp from "../../components/downloadApp/DownloadApp";
+import Trending from "../../components/trending/tredning"
+import Cards from "../../components/typeCarCards/cards";
+import DownloadApp from "../../components/downloadApp/downloadApp";
 import Consultation from "../../components/consultation/consultation";
 import Footer from "../../components/footer/footer";
 import mainImg from "../../assets/red-mercedes.png";
-import styles from "../mainPage/Main.module.css";
+import styles from "../mainPage/main.module.css";
 
 const MainPage = () => {
   return (

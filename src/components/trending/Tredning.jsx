@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./trending.module.css";
 import bmwImg from "../../assets/bmw.jpg";
 import audiImg from "../../assets/audi.jpg";
@@ -23,7 +22,7 @@ const Trending = () => {
 
         <div className={styles.trending_post}>
           <img src={rangeImg} alt="" />
-          <h6>Compact SUV's</h6>
+          <h6>Compact SUV`&apos;`s</h6>
           <p>7,653 vehicles</p>
         </div>
 

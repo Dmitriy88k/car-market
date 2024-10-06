@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import styles from "../carDetails/CarDetails.module.css"
+import styles from "../carDetails/carDetails.module.css"
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -33,7 +33,11 @@ const CarDetails = () => {
         </div>
         <div className={styles.cars_list}>
           {car.images.map((image, index) => (
-            <img src={image} alt={`${car.make} ${car.model} ${index + 1}`}></img>
+            <img 
+              key={index}
+              src={image} 
+              alt={`${car.make} ${car.model} ${index + 1}`}> 
+            </img>
           ))}
         </div>
         

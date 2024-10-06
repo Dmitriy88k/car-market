@@ -2,11 +2,8 @@
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(3, 1fr);
-}
-
-.used_cars_container {
   width: 100%;
-  padding: 20px 50px 20px 0;
+  padding: 20px 0;
 }
 
 @media (max-width: 1350px) {
@@ -16,8 +13,7 @@
 }
 
 @media (max-width: 920px) {
-
-  .used_cars_container {
+  .used_cars_list {
     width: 90%;
     margin: 0 auto;
   }

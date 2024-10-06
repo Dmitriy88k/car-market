@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
+import styles from "./header.module.css";
 import IconImg from "../../assets/logo.png";
-import DownImg from "../../assets/down.png"
+import DownImg from "../../assets/down.png";
 import { app, db } from "../../firebase";
 import { getAuth, signOut } from "firebase/auth";
-import {collection, getDocs, query, where} from "firebase/firestore";
-
+import { collection, getDocs, query, where } from "firebase/firestore";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 async function getDatav2(uid) {
   try {
@@ -25,12 +26,32 @@ async function getDatav2(uid) {
   }
 }
 
+const MyLink = ({ name, link }) => {
+  return (
+    <li className={styles.nav_link_item}>
+      <NavLink
+        className={({ isActive}) => 
+          `${styles.nav_link} ${isActive && styles.active_link}`
+        }
+        to={link}
+      >
+        {name}
+      </NavLink>
+    </li>
+    
+  );
+};
+
+MyLink.propTypes = {
+  name: PropTypes.string.isRequired, 
+  link: PropTypes.string.isRequired, 
+};
 
 const Header = () => {
-  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const [profile, setProfile] = useState();
+  const [loading, setLoading] = useState(true);
   const [auth, setAuth] = useState();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -41,48 +62,45 @@ const Header = () => {
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
-  }
+  };
 
   const handleLogout = () => {
     signOut(auth);
-  }
+  };
 
   useEffect(() => {
-    setAuth(getAuth(app))
-  },[])
+    setAuth(getAuth(app));
+  }, []);
 
- 
   useEffect(() => {
     const auth = getAuth(app);
-    const unsubscribe = auth?.onAuthStateChanged(user => {
+    const unsubscribe = auth?.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
 
-    return () => unsubscribe && unsubscribe(); 
+    return () => unsubscribe && unsubscribe();
   }, []);
 
   useEffect(() => {
     if (!currentUser) return;
-
-    setTimeout(async () => {
-      const data = await getDatav2(currentUser.uid);
+    getDatav2(currentUser.uid).then((data) => {
       setProfile(data);
-    }, 1000); 
+      setLoading(false);
+    });
   }, [currentUser]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if(dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return ()=> {
+    return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-    }
+    };
   }, []);
-
 
   const isAuthenticated = !!currentUser;
 
@@ -106,89 +124,67 @@ const Header = () => {
         <ul
           className={`${styles.nav_links} ${menuOpen ? styles.nav_active : ""}`}
         >
-          <li className={styles.nav_link_item}>
-            <Link
-              className={`${styles.nav_link} ${
-                pathname === "/" ? styles.active_link : ""
-              }`}
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li className={styles.nav_link_item}>
-            <Link
-              className={`${styles.nav_link} ${
-                pathname === "/used-cars" ? styles.active_link : ""
-              }`}
-              to="/used-cars"
-            >
-              Used Cars
-            </Link>
-          </li>
-          <li className={styles.nav_link_item}>
-            <Link
-              className={`${styles.nav_link} ${
-                pathname === "/sell-car" ? styles.active_link : ""
-              }`}
-              to="/sell-car"
-            >
-              Sell Car
-            </Link>
-          </li>
-          <li className={styles.nav_link_item}>
-            <Link
-              className={`${styles.nav_link} ${
-                pathname === "/contact-us" ? styles.active_link : ""
-              }`}
-              to="/contact-us"
-            >
-              Contact Us
-            </Link>
-          </li>
+          <MyLink name="Home" link={"/"}/>
+          <MyLink name="Used Cars" link={"/used-cars"}/>
+          <MyLink name="Sell Car" link={"/sell-car"}/>
+          <MyLink name="Contact Us" link={"/contact-us"}/>
         </ul>
       </div>
 
       <div className={styles.auth_links}>
-        {!isAuthenticated && (
+        {!isAuthenticated && !loading && (
           <>
-            <a href="/login" className={styles.auth_link} target="_blank" rel="noopener noreferer"> 
+            <a
+              href="/login"
+              className={styles.auth_link}
+              target="_blank"
+              rel="noopener noreferer"
+            >
               Login
             </a>
             <span className={styles.separator}> | </span>
-            <a href="/signup" className={styles.auth_link} target="_blank" rel="noopener noreferer"> 
+            <a
+              href="/signup"
+              className={styles.auth_link}
+              target="_blank"
+              rel="noopener noreferer"
+            >
               Sign Up
             </a>
           </>
         )}
 
-        {isAuthenticated && (
+        {isAuthenticated && !loading && (
           <>
             <div className={styles.profile_section}>
               <div>
-                <img 
-                  src={profile?.picture || "default-profile-pic.png"} 
-                  alt="" 
-                  onClick={toggleDropdown}  
-                />
+                {profile?.picture && (
+                  <img
+                    src={profile?.picture || "default-profile-pic.png"}
+                    alt=""
+                    onClick={toggleDropdown}
+                  />
+                )}
               </div>
-              
+
               <div>
-                <span onClick={toggleDropdown} className={styles.dropdown_profile}>
-                  {profile?.name || "Profile"} 
+                <span
+                  onClick={toggleDropdown}
+                  className={styles.dropdown_profile}
+                >
+                  {profile?.name || "Profile"}
                   <span className={styles.drop_down_img}>
                     <img src={DownImg} alt="" />
                   </span>
                 </span>
               </div>
-              
 
               {dropdownOpen && (
                 <div className={styles.dropdown_menu} ref={dropdownRef}>
-                  <Link to="/profile" className={styles.dropdown_item}>
+                  <Link to="/profile-info" className={styles.dropdown_item}>
                     View Profile
                   </Link>
-                  <Link to="/settings" className={styles.dropdown_item}>
+                  <Link to="/profile-settings" className={styles.dropdown_item}>
                     Settings
                   </Link>
                   <button
@@ -197,12 +193,11 @@ const Header = () => {
                   >
                     Log Out
                   </button>
-
                 </div>
               )}
             </div>
           </>
-        )}    
+        )}
       </div>
     </nav>
   );

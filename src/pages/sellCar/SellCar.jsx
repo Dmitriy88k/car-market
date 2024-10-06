@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import styles from "../sellCar/SellCar.module.css";
+import styles from "../sellCar/sellCar.module.css";
 import Malibu from "../../assets/chevrolet_malibu.png";
 import Cloud from "../../assets/cloud.png";
 import Footer from "../../components/footer/footer";
@@ -127,7 +127,7 @@ const SellCar = () => {
       setCarMileage("");
     } else {
       const numericValue = Number(mileageValue);
-      const formattedMileage = numericValue.toLocaleString();
+      const formattedMileage = numericValue.toLocaleString('en-US');
       setCarMileage(formattedMileage);
     }
   };
@@ -187,20 +187,21 @@ const SellCar = () => {
       </div>
 
       <div className={styles.sell_car_form_section}>
-        <div className={styles.success_submit_message}>
-          {isSubmitted && (
-            <div className={styles.success_message}>
-              <h1>Successfully submitted</h1>
-              <button className={styles.ok_button} onClick={handleOkClick}>
-                OK
-              </button>
-            </div>
-          )}
-        </div>
+        {isSubmitted && (
+          <div className={styles.success_submit_message}>
+            
+              <div className={styles.success_message}>
+                <h1>Successfully submitted</h1>
+                <button className={styles.ok_button} onClick={handleOkClick}>
+                  OK
+                </button>
+              </div>
+          </div>
+        )}
         {!isLoggedIn && <p className={styles.login_prompt}>Please log in to submit a listing.</p>}
         <form onSubmit={handleSubmit}>
           <select
-            className={styles.select_type_car}
+            className={styles.select}
             value={carType}
             onChange={(e) => setCarType(e.target.value)}
             required
@@ -214,7 +215,7 @@ const SellCar = () => {
           </select>
 
           <select
-            className={styles.select_year}
+            className={styles.select}
             value={carYear}
             onChange={(e) => setCarYear(e.target.value)}
             required
@@ -230,7 +231,6 @@ const SellCar = () => {
 
           <input
             type="text"
-            className={styles.vehicle_make}
             placeholder="Make"
             value={carMake}
             onChange={(e) => setCarMake(e.target.value)}
@@ -240,7 +240,6 @@ const SellCar = () => {
 
           <input
             type="text"
-            className={styles.vehicle_model}
             placeholder="Model"
             value={carModel}
             onChange={(e) => setCarModel(e.target.value)}
@@ -250,7 +249,6 @@ const SellCar = () => {
 
           <input
             type="text"
-            className={styles.vehicle_mileage}
             placeholder="Mileage"
             value={carMileage}
             onChange={handleMileageChange}
@@ -260,7 +258,6 @@ const SellCar = () => {
 
           <input
             type="text"
-            className={styles.vehicle_price}
             placeholder="Price"
             value={carPrice}
             onChange={handlePriceChange}
@@ -268,11 +265,11 @@ const SellCar = () => {
             disabled={!isLoggedIn}
           />
 
-          <div className={styles.image_previews}>
+          <div>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="images">
+              <Droppable droppableId="droppable" direction="horizontal" >
                 {(provided) => (
-                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                  <div {...provided.droppableProps} ref={provided.innerRef} className={styles.image_previews}>
                     {carImages.map((image, index) => (
                       <Draggable key={index} draggableId={index.toString()} index={index}>
                         {(provided) => (
@@ -282,7 +279,7 @@ const SellCar = () => {
                             {...provided.dragHandleProps}
                             
                           >
-                            <p className={styles.image_name}>{image.name}</p>
+                            <p className={styles.image_name}> <img className={styles.preview_images}src={imagePreviews[index]} alt=""/></p>
                           </div>
                         )}
                       </Draggable>

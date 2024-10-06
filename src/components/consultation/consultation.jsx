@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./consultation.module.css";
 
 const Consultation = () => {

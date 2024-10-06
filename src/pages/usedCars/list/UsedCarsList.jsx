@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styles from "./UsedCarsList.module.css";
+import { useState, useEffect } from "react";
+import styles from "./usedCarsList.module.css";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import UsedCarsItem from "../item/UsedCarsItem"
+import UsedCarsItem from "../item/usedCarsItem"
 
 async function getData() {
   const querySnapshot = await getDocs(collection(db, "listings"));
@@ -24,13 +24,11 @@ const UsedCarsList = () => {
     });
   }, []);
 
-  return (
-    <div className={styles.used_cars_container}>
-        <div className={styles.used_cars_list}>
-          {listings.map((listing) => (
-            <UsedCarsItem key={listing.id} listing={listing} />
-          ))}
-        </div>
+  return ( 
+    <div className={styles.used_cars_list}>
+      {listings.map((listing) => (
+        <UsedCarsItem key={listing.id} listing={listing} />
+      ))}
     </div>
   );
 };
