@@ -7,7 +7,6 @@ import SellCar from './pages/sellCar/sellCar';
 import CarDetails from './pages/carDetails/carDetails'
 import Header from '../src/components/header/header'
 import ProfileSettings from './pages/profileSettings/profileSettings'
-import ProfileInfo from './pages/profileInfo/profileInfo'
 import './App.css';
 import "./firebase";
 
@@ -30,7 +29,6 @@ const App = () => {
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/car-details/:id" element={<CarDetails/>}/>
           <Route path="/profile-settings" element={<ProfileSettings/>}/>
-          <Route path="/profile-info" element={<ProfileInfo/>}/>
         </Routes>
 
       </div>

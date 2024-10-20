@@ -104,8 +104,8 @@
 
 .dropdown_menu {
   position: absolute;
-  top: 50px;
-  right: 10px;
+  top: 4rem;
+  right: 6rem;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;

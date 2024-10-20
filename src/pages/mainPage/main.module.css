@@ -1,9 +1,10 @@
 .main_container {
   display: flex;
   align-items: center;
-  width: 100%;
-  justify-content: space-around;
-  margin-bottom: 13.1rem;
+  width: 90%;
+  justify-content: space-between;
+  margin:0 auto 13.1rem auto;
+  
 }
 
 .header {
@@ -20,6 +21,9 @@
 
 .paragraph {
   font-weight: 400;
+}
+.main_text {
+  width: 90%;
 }
 
 @media (max-width: 920px) {
@@ -42,4 +46,5 @@
   .main_text {
     text-align: center;
   }
+
 }

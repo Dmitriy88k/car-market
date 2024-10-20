@@ -1,37 +1,19 @@
 import { useState } from 'react';
 import styles from './filter.module.css';
+import PropTypes from 'prop-types';
 
-const Filter = () => {
-  //Устанавливаем цену. Изначально цена стоит "$50,000", затем при помощи useState цена отображает то, что ввел User в input
-  const [maxPrice, setMaxPrice] = useState("$50,000");
+const Filter = ({maxPrice, setMaxPrice}) => {
 
-  
   const [showPriceFilter, setShowPriceFilter] = useState(true); 
 
-
-
-  //Создаем функцию, которая превращает номер в стринг и заменяет/ставит запятые в правильном месте, например ($1,000)
-  const formatNumber = (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
-  //Создаем функцию, которая берет значения из инпута, который ввел User, форматируем при помощи вышеуказанной функции 
-  // и сохраняем это отформатированное значение
   const handlePriceChange = (e) => {
-    //Мы испльзуем let здесь, потому что цену которую вводит User в input всегда будет меняться, она не будет const.
-    //Мы берем значение из User input испльзуя .target.value
     let value = e.target.value.replace(/[^0-9]/g, '');
-    //Мы форматируем номер, который ввел User, при помощи formatNumber функции в string с запятыми.
-    value = formatNumber(value);
-    //То что ввел в input наш User, мы сохраняем значение при помощи useState в setMaxPrice 
-    //также перед `${value}` мы поставили знак "$", чтобы цена отображалась с этим знаком впереди
-    setMaxPrice(`$${value}`);
+    setMaxPrice(Number(value));
   };
 
   const handleRangeChange = (e) => {
     let value = e.target.value;
-    value = formatNumber(value);
-    setMaxPrice(`$${value}`);
+    setMaxPrice(Number(value));
   };
 
   const togglePriceFilter = () => {
@@ -55,14 +37,18 @@ const Filter = () => {
           {showPriceFilter && (
             <div className={styles.price_filter}>
               <label htmlFor="price">Max Vehicle Price</label>
-              <input
-                className={styles.input_price}
-                type="text"
-                id="price"
-                name="price"
-                value={maxPrice}
-                onChange={handlePriceChange}
-              />
+              <div className={styles.input_price_wrapper}>
+                <input
+                  className={styles.input_price}
+                  type="number"
+                  id="price"
+                  name="price"
+                  placeholder="50000"
+                  value={maxPrice}
+                  onChange={handlePriceChange}
+                />
+              </div>
+              
               <input
                 className={styles.filter_price_range}
                 type="range"
@@ -71,7 +57,7 @@ const Filter = () => {
                 min="0"
                 max="100000"
                 step="1000"
-                value={maxPrice.replace(/[^0-9]/g, '')}
+                value={maxPrice}
                 onChange={handleRangeChange}
               />
             </div>
@@ -81,5 +67,11 @@ const Filter = () => {
     </div>
   );
 };
+
+Filter.propTypes = {
+  maxPrice: PropTypes.number.isRequired,  // maxPrice should be a number
+  setMaxPrice: PropTypes.func.isRequired, // setMaxPrice should be a function
+};
+
 
 export default Filter;

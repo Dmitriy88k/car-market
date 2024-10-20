@@ -181,11 +181,8 @@ const Header = () => {
 
               {dropdownOpen && (
                 <div className={styles.dropdown_menu} ref={dropdownRef}>
-                  <Link to="/profile-info" className={styles.dropdown_item}>
-                    View Profile
-                  </Link>
                   <Link to="/profile-settings" className={styles.dropdown_item}>
-                    Settings
+                    Profile Settings
                   </Link>
                   <button
                     onClick={handleLogout}
