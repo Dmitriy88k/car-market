@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth'; 
 import { app, db, storage } from "../../firebase";
-import { collection, getDocs, query, where, doc, setDoc } from 'firebase/firestore'; 
-import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore'; 
+import { ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import styles from "./profileSettings.module.css";
 
 async function getDatav2(uid) {
@@ -33,6 +33,7 @@ const ProfileInfo = () => {
     const auth = getAuth(app);
     const unsubscribe = auth?.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
+      console.log(user);
     });
     return () => unsubscribe && unsubscribe();
   }, []);
@@ -64,20 +65,22 @@ const ProfileInfo = () => {
     setLoading(true);
 
     try {
-      if (profile?.picture) {
-        const oldImagePath = extractFilePathFromURL(profile.picture);
-        if (oldImagePath) {
-          const oldImageRef = ref(storage, oldImagePath);
-          await deleteObject(oldImageRef);
-        }
-      }
+      // if (profile?.picture) {
+      //   const oldImagePath = extractFilePathFromURL(profile.picture);
+      //   if (oldImagePath) {
+      //     const oldImageRef = ref(storage, oldImagePath);
+      //     await deleteObject(oldImageRef);
+      //   }
+      // }
 
       const storageRef = ref(storage, `profile_pictures/${currentUser.uid}`);
       await uploadBytes(storageRef, newImageFile);
       const downloadURL = await getDownloadURL(storageRef);
+      
 
       const userDoc = doc(db, 'users', currentUser.uid);
-      await setDoc(userDoc, { picture: downloadURL }, { merge: true });
+      await updateDoc(userDoc, { picture: downloadURL });
+      console.log(userDoc.firestore.toJSON());
 
       setProfile((prevProfile) => ({
         ...prevProfile,
@@ -93,10 +96,10 @@ const ProfileInfo = () => {
     }
   };
 
-  const extractFilePathFromURL = (url) => {
-    const match = url.match(/\/o\/(.*?)\?/);
-    return match ? decodeURIComponent(match[1]) : null;
-  };
+  // const extractFilePathFromURL = (url) => {
+  //   const match = url.match(/\/o\/(.*?)\?/);
+  //   return match ? decodeURIComponent(match[1]) : null;
+  // };
 
   return (
     <div className={styles.profile_info}>

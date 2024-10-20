@@ -27,7 +27,7 @@ const UsedCarsList = ({maxPrice}) => {
 
   const filteredListings = listings.
     filter((listing) => listing.price <= maxPrice) 
-    .sort((a, b) => a.price - b.price);
+    
 
 
   return ( 
