@@ -2,6 +2,7 @@ import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import { app, db } from "../../firebase";
 import { collection, addDoc} from "firebase/firestore";
 import { useState } from "react";
+import DefaultAvatarPicture from "../../assets/default-avatar-picture.webp";
 import styles from "../signup/signup.module.css";
 import IconImg from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -42,7 +43,7 @@ const Signup = () => {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         name: `${firstName} ${lastName}`,
-        picture: "https://thumbs.dreamstime.com/b/default-avatar-man-to-social-user-default-avatar-man-to-social-user-vector-illustration-109538855.jpg", // Placeholder or default URL
+        picture: DefaultAvatarPicture
       });
 
       navigate("/login");

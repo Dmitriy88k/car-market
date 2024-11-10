@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth'; 
 import { app, db, storage } from "../../firebase";
-import { collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore'; 
+import { collection, getDocs, query, where, doc, updateDoc, onSnapshot } from 'firebase/firestore'; 
 import { ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import styles from "./profileSettings.module.css";
 
@@ -11,7 +11,10 @@ async function getDatav2(uid) {
     const querySnapshot = await getDocs(q);
     
     if (!querySnapshot.empty) {
-      return querySnapshot.docs[0].data();
+      return {
+        id: querySnapshot.docs[0].id,
+        ...querySnapshot.docs[0].data()
+      };
     } else {
       console.error("No user found with UID:", uid);
       return null;
@@ -27,25 +30,45 @@ const ProfileInfo = () => {
   const [currentUser, setCurrentUser] = useState();
   const [newImageFile, setNewImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [previewImage, setPreviewImage] = useState('/assets/default-profile-pic.png'); // Default image
+  const [previewImage, setPreviewImage] = useState('/assets/default-avatar-picture.webp'); // Default image
 
   useEffect(() => {
     const auth = getAuth(app);
     const unsubscribe = auth?.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
-      console.log(user);
     });
     return () => unsubscribe && unsubscribe();
   }, []);
   
   useEffect(() => {
     if (!currentUser) return;
+
+    let unsubscribe;
+
     getDatav2(currentUser.uid).then((data) => {
       setProfile(data);
       if (data?.picture) {
-        setPreviewImage(data.picture); // Set preview to existing picture
+        setPreviewImage(data.picture); 
+      }
+
+      if (data?.id) {
+        const userDocRef = doc(db, 'users', data.id);
+        unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const updatedData = docSnapshot.data();
+            setProfile((prevProfile) => ({
+              ...prevProfile,
+              ...updatedData
+            }));
+            if (updatedData.picture) {
+              setPreviewImage(updatedData.picture);
+            }
+          }
+        });
+        
       }
     });
+    return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
   const handleFileChange = (e) => {
@@ -53,7 +76,6 @@ const ProfileInfo = () => {
       const file = e.target.files[0];
       setNewImageFile(file);
 
-      // Create a preview URL
       const previewURL = URL.createObjectURL(file);
       setPreviewImage(previewURL);
     }
@@ -65,29 +87,18 @@ const ProfileInfo = () => {
     setLoading(true);
 
     try {
-      // if (profile?.picture) {
-      //   const oldImagePath = extractFilePathFromURL(profile.picture);
-      //   if (oldImagePath) {
-      //     const oldImageRef = ref(storage, oldImagePath);
-      //     await deleteObject(oldImageRef);
-      //   }
-      // }
+      if (!profile?.id) {
+        return;
+      }
 
       const storageRef = ref(storage, `profile_pictures/${currentUser.uid}`);
       await uploadBytes(storageRef, newImageFile);
       const downloadURL = await getDownloadURL(storageRef);
       
 
-      const userDoc = doc(db, 'users', currentUser.uid);
+      const userDoc = doc(db, 'users', profile.id);
       await updateDoc(userDoc, { picture: downloadURL });
-      console.log(userDoc.firestore.toJSON());
-
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        picture: downloadURL,
-      }));
-
-      alert("Profile photo updated successfully!");
+ 
     } catch (error) {
       console.error("Error uploading photo:", error);
       alert("Failed to upload photo");
@@ -96,15 +107,11 @@ const ProfileInfo = () => {
     }
   };
 
-  // const extractFilePathFromURL = (url) => {
-  //   const match = url.match(/\/o\/(.*?)\?/);
-  //   return match ? decodeURIComponent(match[1]) : null;
-  // };
 
   return (
     <div className={styles.profile_info}>
       <h1>Profile settings</h1>
-      <h2>Account info</h2>
+      <h3>Account info</h3>
       <div className={styles.profile_photo}>
         <img
           src={previewImage}

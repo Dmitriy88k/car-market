@@ -1,0 +1,79 @@
+/* Remove arrows in WebKit browsers (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.filter_section {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.filters {
+  width: 100%;
+}
+
+.filter_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.toggle_icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.price_filter {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  transition: height 0.3s ease;
+  overflow: hidden;
+}
+
+.price_filter label {
+  margin-bottom: 5px;
+}
+
+.input_price {
+  padding-left: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.input_price_wrapper {
+  position: relative;
+}
+
+.input_price_wrapper::before {
+  position: absolute;
+  content: "$";
+  left: 6px;
+  top: 50%;
+  transform: translateY(-51%);
+}
+
+.input_price_wrapper input {
+  width: 100%;
+  padding: 8px 0 8px 15px;
+}
+
+.filter_price_range {
+  margin-top: 5px;
+}
+
+

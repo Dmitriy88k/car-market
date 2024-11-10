@@ -16,8 +16,10 @@ async function getData() {
   });
 }
 
-const UsedCarsList = ({maxPrice}) => {
+const UsedCarsList = ({maxPrice, maxMileage, yearRange}) => {
   const [listings, setListings] = useState([]);
+  
+  
 
   useEffect(() => {
     getData().then((data) => {
@@ -25,8 +27,19 @@ const UsedCarsList = ({maxPrice}) => {
     });
   }, []);
 
-  const filteredListings = listings.
-    filter((listing) => listing.price <= maxPrice) 
+  const filteredListings = listings.filter((listing) => {
+    const price = parseFloat(listing.price);
+    const mileage = parseFloat(listing.mileage);
+    const year = parseInt(listing.year, 10);
+
+    const isWithinPrice = price <= maxPrice;
+    const isWithinMileage = mileage <= maxMileage;
+    const isWithinYearRange = 
+      (!yearRange.fromYear || year >= parseInt(yearRange.fromYear)) &&
+      (!yearRange.toYear || year <=parseInt(yearRange.toYear));
+      
+    return isWithinPrice && isWithinMileage && isWithinYearRange;
+  });
     
 
 
@@ -41,6 +54,11 @@ const UsedCarsList = ({maxPrice}) => {
 
 UsedCarsList.propTypes = {
   maxPrice: PropTypes.number.isRequired, 
+  maxMileage: PropTypes.number.isRequired,
+  yearRange: PropTypes.shape({
+    fromYear: PropTypes.string,
+    toYear: PropTypes.string,
+  }).isRequired,
 };
 
 

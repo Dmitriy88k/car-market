@@ -8,12 +8,14 @@
 
 .used_cars_list{
   width: 75%;
+  
 }
 
 .used_cars_filter {
   width: 25%;
   background: rgba(180, 175, 174, 0.1);;
   margin-top: 20px;
+  margin-bottom: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styles from './filter.module.css';
+import styles from './priceFilter.module.css';
 import PropTypes from 'prop-types';
 
-const Filter = ({maxPrice, setMaxPrice}) => {
+const PriceFilter = ({maxPrice, setMaxPrice}) => {
 
-  const [showPriceFilter, setShowPriceFilter] = useState(true); 
+  const [showPriceFilter, setShowPriceFilter] = useState(false); 
 
   const handlePriceChange = (e) => {
     let value = e.target.value.replace(/[^0-9]/g, '');
@@ -68,10 +68,10 @@ const Filter = ({maxPrice, setMaxPrice}) => {
   );
 };
 
-Filter.propTypes = {
+PriceFilter.propTypes = {
   maxPrice: PropTypes.number.isRequired,  // maxPrice should be a number
   setMaxPrice: PropTypes.func.isRequired, // setMaxPrice should be a function
 };
 
 
-export default Filter;
+export default PriceFilter;

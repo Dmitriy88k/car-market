@@ -5,11 +5,6 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Remove arrows in Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
 .filter_section {
   width: 90%;
   margin: 0 auto;
@@ -40,7 +35,7 @@ input[type="number"] {
   transform: rotate(180deg);
 }
 
-.price_filter {
+.mileage_filter {
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -48,11 +43,11 @@ input[type="number"] {
   overflow: hidden;
 }
 
-.price_filter label {
+.mileage_filter label {
   margin-bottom: 5px;
 }
 
-.input_price {
+.input_mileage {
   padding-left: 15px;
   font-size: 1rem;
   border: 1px solid #ccc;
@@ -60,24 +55,24 @@ input[type="number"] {
   outline: none;
 }
 
-.input_price_wrapper {
+.input_mileage_wrapper {
   position: relative;
 }
 
-.input_price_wrapper::before {
+.input_mileage_wrapper::before {
   position: absolute;
-  content: "$";
+  content: "";
   left: 6px;
   top: 50%;
   transform: translateY(-51%);
 }
 
-.input_price_wrapper input {
+.input_mileage_wrapper input {
   width: 100%;
   padding: 8px 0 8px 15px;
 }
 
-.filter_price_range {
+.filter_mileage_range {
   margin-top: 5px;
 }
 

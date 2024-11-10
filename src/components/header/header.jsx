@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./header.module.css";
 import IconImg from "../../assets/logo.png";
+import DefaultAvatarPicture from "../../assets/default-avatar-picture.webp";
 import DownImg from "../../assets/down.png";
 import { app, db } from "../../firebase";
 import { getAuth, signOut } from "firebase/auth";
@@ -76,6 +77,7 @@ const Header = () => {
     const auth = getAuth(app);
     const unsubscribe = auth?.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      setLoading(false);
     });
 
     return () => unsubscribe && unsubscribe();
@@ -85,7 +87,7 @@ const Header = () => {
     if (!currentUser) return;
     getDatav2(currentUser.uid).then((data) => {
       setProfile(data);
-      setLoading(false);
+      
     });
   }, [currentUser]);
 
@@ -160,7 +162,7 @@ const Header = () => {
               <div>
                 {profile?.picture && (
                   <img
-                    src={profile?.picture || "default-profile-pic.png"}
+                    src={profile?.picture || DefaultAvatarPicture}
                     alt=""
                     onClick={toggleDropdown}
                   />
