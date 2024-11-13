@@ -1,0 +1,15 @@
+.nav_link_item {
+  margin-right: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.nav_link {
+  text-decoration: none;
+  color: #000;
+}
+
+.active_link {
+  color: #ff4e1f;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}

@@ -14,24 +14,15 @@ const firebaseConfig = {
   measurementId: "G-SQR4WMGH8N"
 };
 
-/*let _app;*/
-export const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { db, storage };
+export { db, storage, auth, app };
 
-/*function init() {
-  if(!_app) {
-    _app = initializeApp(firebaseConfig);
-  }
 
-  return _app;
-}
-  */
 
 
 

@@ -4,58 +4,21 @@ import styles from "./header.module.css";
 import IconImg from "../../assets/logo.png";
 import DefaultAvatarPicture from "../../assets/default-avatar-picture.webp";
 import DownImg from "../../assets/down.png";
-import { app, db } from "../../firebase";
-import { getAuth, signOut } from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
-
-async function getDatav2(uid) {
-  try {
-    const q = query(collection(db, "users"), where("uid", "==", uid));
-    const querySnapshot = await getDocs(q);
-
-    if (!querySnapshot.empty) {
-      return querySnapshot.docs[0].data();
-    } else {
-      console.error("No user found with UID:", uid);
-      return null;
-    }
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    return null;
-  }
-}
-
-const MyLink = ({ name, link }) => {
-  return (
-    <li className={styles.nav_link_item}>
-      <NavLink
-        className={({ isActive}) => 
-          `${styles.nav_link} ${isActive && styles.active_link}`
-        }
-        to={link}
-      >
-        {name}
-      </NavLink>
-    </li>
-    
-  );
-};
-
-MyLink.propTypes = {
-  name: PropTypes.string.isRequired, 
-  link: PropTypes.string.isRequired, 
-};
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
+import { MyLink } from "../myLink/myLink";
+import { getProfileId } from "../../api";
+import { useProfile } from "../hooks/useProfile";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState();
-  const [profile, setProfile] = useState();
+  const [profileId, setProfileId] = useState();
   const [loading, setLoading] = useState(true);
-  const [auth, setAuth] = useState();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const profile = useProfile(profileId);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -70,11 +33,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    setAuth(getAuth(app));
-  }, []);
-
-  useEffect(() => {
-    const auth = getAuth(app);
     const unsubscribe = auth?.onAuthStateChanged((user) => {
       setCurrentUser(user);
       setLoading(false);
@@ -85,24 +43,14 @@ const Header = () => {
 
   useEffect(() => {
     if (!currentUser) return;
-    getDatav2(currentUser.uid).then((data) => {
-      setProfile(data);
-      
+    getProfileId(currentUser.uid).then((id) => {
+      setProfileId(id);
     });
   }, [currentUser]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useClickOutside(dropdownRef, () => {
+    setDropdownOpen();
+  })
 
   const isAuthenticated = !!currentUser;
 
@@ -126,10 +74,10 @@ const Header = () => {
         <ul
           className={`${styles.nav_links} ${menuOpen ? styles.nav_active : ""}`}
         >
-          <MyLink name="Home" link={"/"}/>
-          <MyLink name="Used Cars" link={"/used-cars"}/>
-          <MyLink name="Sell Car" link={"/sell-car"}/>
-          <MyLink name="Contact Us" link={"/contact-us"}/>
+          <MyLink name="Home" link={"/"} />
+          <MyLink name="Used Cars" link={"/used-cars"} />
+          <MyLink name="Sell Car" link={"/sell-car"} />
+          <MyLink name="Contact Us" link={"/contact-us"} />
         </ul>
       </div>
 

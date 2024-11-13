@@ -19,6 +19,7 @@ const UsedCars = () => {
 
   return (
     <div className={styles.used_cars_list_and_filter}>
+      
       <div className={styles.used_cars_list}>
         
         <UsedCarsList maxPrice={maxPrice} maxMileage={maxMileage} yearRange={yearRange}/>
