@@ -28,12 +28,14 @@
   display: flex;
   align-items: center;
   padding-bottom: 0.8rem;
+  
 }
 
 .auth_link {
   color: #000;
   text-decoration: none;
   margin: 0 0.5rem;
+  
 }
 
 .profile_section {
@@ -67,20 +69,21 @@
   background-color: #000;
   margin: 4px 0;
   transition: 0.4s;
+  
 }
 
 .change .bar1 {
-  transform: rotate(-45deg) translate(-5px, 6px);
+  transform: rotate(47deg) translate(6px, 10px);
 }
 
 .change .bar2 {
   opacity: 0;
 }
 
-.change .bar3 {
-  transform: rotate(45deg) translate(-5px, -6px);
-}
 
+.change .bar3 {
+  transform: rotate(-47deg) translate(5px, -11px);
+}
 .nav_active {
   display: flex;
   flex-direction: column;
@@ -96,6 +99,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 150px;
+  
 }
 
 .dropdown_item {
@@ -141,6 +145,7 @@
   width: 100%;
   outline: none;
   border: none;
+  
 }
 
 .dropdown_menu button:hover,
@@ -150,38 +155,78 @@
   outline: none;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 955px) {
   .nav_links,
   .auth_links {
-    display: none;
+    visibility: hidden; /* Make the menu invisible */
+    opacity: 0; /* Make the menu transparent */
     width: 100%;
     flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 25px 0;
+    height: 80vh;
+    gap: 25px;
+    margin: 0 auto;
     position: absolute;
-    top: 60px;
+    top: 7rem;
     left: 0;
-    background-color: white;
     border-top: 1px solid #eaeaea;
+    border-radius: 25px;
+    background: #ff4e1f;
+    z-index: 1;
+    transform: translateY(-100%); /* Start off-screen (above) */
+    transition: transform 0.5s ease-out, opacity 0.3s ease-out, visibility 0s 0.5s; /* Smooth transition */
+  
   }
 
   .nav_links.nav_active,
   .auth_links.nav_active {
-    display: flex;
+    visibility: visible; /* Make the menu visible */
+    opacity: 1; /* Make the menu fully opaque */
+    transform: translateY(0); /* Move into view (from top to bottom) */
+    transition: transform 0.5s ease-out, opacity 0.3s ease-out, visibility 0s; /* Apply transition immediately */
   }
 
   .hamburger {
     display: flex;
+    
   }
 
   .navbar {
     margin: 0 auto;
     width: 100%;
+    
   }
 
   .nav_link_item {
     margin: 1rem 0;
+
+    
   }
 
   .auth_link {
     margin: 1rem 0;
+
+    
+  }
+
+  .nav_container {
+    display: flex;
+    justify-content: space-between;
+    width: 82%;
+    margin: 0 auto;
+    
+  }
+}
+
+@media (min-width: 955px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav_links {
+    display: flex;
+    flex-direction: row;
   }
 }

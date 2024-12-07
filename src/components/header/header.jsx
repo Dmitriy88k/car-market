@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useRef} from "react";
+import { Link, useLocation  } from "react-router-dom";
 import styles from "./header.module.css";
 import IconImg from "../../assets/logo.png";
 import DefaultAvatarPicture from "../../assets/default-avatar-picture.webp";
@@ -19,6 +19,12 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const profile = useProfile(profileId);
+
+  const location = useLocation();
+  useEffect(() => {
+    setMenuOpen(false);
+  },[location.pathname])
+  
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -49,35 +55,32 @@ const Header = () => {
   }, [currentUser]);
 
   useClickOutside(dropdownRef, () => {
-    setDropdownOpen();
-  })
+    setDropdownOpen(false);
+  });
 
   const isAuthenticated = !!currentUser;
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.nav_container}>
+      <div className={styles.nav_container} >
         <div className={styles.logo}>
           <img src={IconImg} alt="logo" />
         </div>
-        <div className={styles.hamburger} onClick={toggleMenu}>
-          <div
-            className={`${styles.bar} ${menuOpen ? styles.change : ""}`}
-          ></div>
-          <div
-            className={`${styles.bar} ${menuOpen ? styles.change : ""}`}
-          ></div>
-          <div
-            className={`${styles.bar} ${menuOpen ? styles.change : ""}`}
-          ></div>
+        <div
+          className={`${styles.hamburger} ${menuOpen ? styles.change : ""}`}
+          onClick={toggleMenu}
+        >
+          <div className={`${styles.bar} ${styles.bar1}`}></div>
+          <div className={`${styles.bar} ${styles.bar2}`}></div>
+          <div className={`${styles.bar} ${styles.bar3}`}></div>
         </div>
         <ul
           className={`${styles.nav_links} ${menuOpen ? styles.nav_active : ""}`}
         >
-          <MyLink name="Home" link={"/"} />
-          <MyLink name="Used Cars" link={"/used-cars"} />
-          <MyLink name="Sell Car" link={"/sell-car"} />
-          <MyLink name="Contact Us" link={"/contact-us"} />
+          <MyLink name="Home" link="/"  />
+          <MyLink name="Used Cars" link="/used-cars"  />
+          <MyLink name="Sell Car" link="/sell-car" />
+          <MyLink name="Contact Us" link="/contact-us" />
         </ul>
       </div>
 

@@ -1,14 +1,21 @@
+.used_cars_container{
+  display: flex;
+  gap: 40px;
+  width: 90%;
+  margin: 0 auto;
+}
+
 .used_cars_list_and_filter {
   display: flex;
   gap: 50px;
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
   margin-top: 25px;
+  margin-bottom: 8rem;
 }
 
 .used_cars_list{
   width: 75%;
-  
 }
 
 .used_cars_filter {
@@ -20,9 +27,21 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 920px) {
+.mobile_filter_button {
+  display: none;
+}
+
+@media (max-width: 955px) {
+
+  .used_cars_container{
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .used_cars_filter {
-    display: none;
+    display: block;
+    margin: 20px auto 45px auto;
+    width: 90%;
+    padding: 25px 0 45px 0;
   }
 
   .used_cars_list{
@@ -33,4 +52,45 @@
     width: 100%;
     gap: 0;
   }
+
+  .mobile_filter_button {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .mobile_filter_button button {
+    background: transparent;
+    padding-left: 0; 
+    outline: none;
+    border: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+
+  .mobile_filter_button button:active, .mobile_filter_button button:focus {
+    outline: none;
+    border: none;
+  }
+
+
+  .used_cars_list_and_filter {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 7rem;
+  }
+
+  .drop_down_img img{
+    border: none;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    position: absolute;
+    top: 12px;
+  }
+
+  
+  
 }
+

@@ -3,41 +3,57 @@ import bmwImg from "../../assets/bmw.jpg";
 import audiImg from "../../assets/audi.jpg";
 import lexusImg from "../../assets/lexus.jpg";
 import rangeImg from "../../assets/range.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, A11y } from "swiper/modules";
 
 const Trending = () => {
   return (
     <div className={styles.trending_section}>
       <h1 className={styles.trending_header}>Trending Near You</h1>
-      <div className={styles.grid_trending_container}>
-        <div className={styles.trending_post}>
-          <img src={bmwImg} alt="" />
-          <h6>BMW Lovers</h6>
-          <p>51,457 vehicles</p>
-        </div>
-        <div className={styles.trending_post}>
-          <img src={audiImg} alt="" />
-          <h6>Used cars under $25,000</h6>
-          <p>23,325 vehicles</p>
-        </div>
+      <div className={styles.swiper_container}>
+        <Swiper
+          className={styles.swiper_section}
+          slidesPerView={3}
+          spaceBetween={0}
+          loop={true}
+          centeredSlides={true}
+          modules={[Navigation, Pagination, A11y]}
+          navigation
+          pagination={{ clickable: true }}
+          breakpoints={{
+            365: {slidesPerView: 1},
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 1 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          <SwiperSlide className={styles.swiper_slide}>
+            <img src={bmwImg} alt="" />
+            <h6>BMW Lovers</h6>
+            <p>51,457 vehicles</p>
+          </SwiperSlide>
 
-        <div className={styles.trending_post}>
-          <img src={rangeImg} alt="" />
-          <h6>Compact SUV`&apos;`s</h6>
-          <p>7,653 vehicles</p>
-        </div>
+          <SwiperSlide className={styles.swiper_slide}>
+            <img src={audiImg} alt="" />
+            <h6>Used cars under $25,000</h6>
+            <p>23,325 vehicles</p>
+          </SwiperSlide>
 
-        <div className={styles.trending_post}>
-          <img src={lexusImg} alt="" />
-          <h6>Luxury Cars</h6>
-          <p>32,958 vehicles</p>
-        </div>
-      </div>
-      <div className={styles.carousel}>
-        <span className={styles.signs}>&lt;</span>
-        <span className={styles.dot}></span>
-        <span className={styles.dot}></span>
-        <span className={styles.dot}></span>
-        <span className={styles.signs}>&gt;</span>
+          <SwiperSlide className={styles.swiper_slide}>
+            <img src={rangeImg} alt="" />
+            <h6>Compact SUV`&apos;`s</h6>
+            <p>7,653 vehicles</p>
+          </SwiperSlide>
+
+          <SwiperSlide className={styles.swiper_slide}>
+            <img src={lexusImg} alt="" />
+            <h6>Luxury Cars</h6>
+            <p>32,958 vehicles</p>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
   );
