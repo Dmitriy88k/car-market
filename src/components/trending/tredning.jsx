@@ -17,17 +17,17 @@ const Trending = () => {
         <Swiper
           className={styles.swiper_section}
           slidesPerView={3}
-          spaceBetween={0}
+          spaceBetween={20}
           loop={true}
           centeredSlides={true}
           modules={[Navigation, Pagination, A11y]}
           navigation
           pagination={{ clickable: true }}
           breakpoints={{
-            365: {slidesPerView: 1},
+            150: { slidesPerView: 1 },
             640: { slidesPerView: 1 },
-            768: { slidesPerView: 1 },
-            1024: { slidesPerView: 3 },
+            992: { slidesPerView: 2, spaceBetween: 0, centeredSlides: false, },
+            1290: { slidesPerView: 3, spaceBetween: 0, centeredSlides: false, },
           }}
         >
           <SwiperSlide className={styles.swiper_slide}>
@@ -53,6 +53,7 @@ const Trending = () => {
             <h6>Luxury Cars</h6>
             <p>32,958 vehicles</p>
           </SwiperSlide>
+          <div className={styles.swiper_pagination}></div>
         </Swiper>
       </div>
     </div>

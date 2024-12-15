@@ -18,24 +18,16 @@
 }
 
 .swiper_section {
-  height: 40vh;
+  height: 300px;
 }
 
 .swiper_slide {
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);*/
   text-align: center;
-  border-radius: 12px;
-  height: 80%;
-  display: flex;
-  align-items: center;
-  margin: auto 0;
-  
 }
 
 .swiper_slide img {
   width: 15rem;
   border-radius: 5px;
-  margin: 25px;
 }
 
 .swiper_slide h6 {
@@ -50,6 +42,15 @@
   color: gray;
 }
 
+.swiper_pagination {
+  height: 300px; 
+}
+
+@media (max-width: 955px) {
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
 
 
 

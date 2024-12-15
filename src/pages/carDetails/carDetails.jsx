@@ -57,13 +57,19 @@ const CarDetails = () => {
 
         <Swiper
           onSwiper={setThumbsSwiper}
-          slidesPerView={4}
-          spaceBetween={10}
+          slidesPerView={10}
+          spaceBetween={40}
           modules={[Thumbs]}
           watchSlidesProgress={true}
           watchSlidesVisibility={true}
           loop={false}
+          centeredSlides={true}
           className={styles.thumbnails_swiper}
+          breakpoints={{
+            
+            955: { slidesPerView: 3, spaceBetween: 10, },
+            1290: { slidesPerView: 4, spaceBetween: 10, },
+          }}
         >
           {car.images.map((image, index) => (
             <SwiperSlide key={index} className={activeIndex === index ? "swiper-slide-thumb-active" : ""}>
