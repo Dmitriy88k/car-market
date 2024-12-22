@@ -41,7 +41,7 @@ const CarDetails = () => {
         < Carousel
           infiniteLoop
           className={styles.caroussel_section}
-          showThumbs
+          showThumbs={false}
         >
           {car.images.map((image, index) => (
             <div key={index} className={styles.car_swiper}>
