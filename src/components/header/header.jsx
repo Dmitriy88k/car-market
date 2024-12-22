@@ -90,7 +90,6 @@ const Header = () => {
             <a
               href="/login"
               className={styles.auth_link}
-              target="_blank"
               rel="noopener noreferer"
             >
               Login
@@ -99,7 +98,6 @@ const Header = () => {
             <a
               href="/signup"
               className={styles.auth_link}
-              target="_blank"
               rel="noopener noreferer"
             >
               Sign Up
