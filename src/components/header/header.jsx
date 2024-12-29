@@ -79,6 +79,11 @@ const Header = () => {
         <ul
           className={`${styles.nav_links} ${menuOpen ? styles.nav_active : ""}`}
         >
+           {menuOpen && (
+    <button className={styles.close_button} onClick={toggleMenu}>
+      &times;
+    </button>
+  )}
           <MyLink name="Home" link="/"  />
           <MyLink name="Used Cars" link="/used-cars"  />
           <MyLink name="Sell Car" link="/sell-car" />
