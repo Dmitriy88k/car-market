@@ -12,7 +12,6 @@ import CarMileage from "../../assets/speed.png"
 import CarColor from "../../assets/drawing.png"
 import CarPrice from "../../assets/price-tag.png"
 import Drivetrain from "../../assets/drivetrain.png"
-import { capitalize } from "../../components/hooks/useCapitalize"
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -41,7 +40,7 @@ const CarDetails = () => {
         < Carousel
           infiniteLoop
           className={styles.caroussel_section}
-          showThumbs={false}
+          showThumbs={true}
         >
           {car.images.map((image, index) => (
             <div key={index} className={styles.car_swiper}>
@@ -83,7 +82,7 @@ const CarDetails = () => {
           <img src={CarColor} alt="" />
             <div className={styles.car_specifications_text}>
               <p className={styles.car_specifications_text_header}>Color</p>
-              <p>{capitalize(car.color)}</p>
+              <p>{car.color}</p>
             </div>
           </div>
 
@@ -92,7 +91,7 @@ const CarDetails = () => {
           <img src={GasStationImg} alt="" />
             <div className={styles.car_specifications_text}>
               <p className={styles.car_specifications_text_header}>Fuel Type</p>
-              <p>{capitalize(car.fuel)}</p>
+              <p>{car.fuel}</p>
             </div>
           </div>
 
@@ -108,7 +107,7 @@ const CarDetails = () => {
           <img src={CarType} alt="" style={{ width: "35px", height: "55px" }}/>
             <div className={styles.car_specifications_text}>
               <p className={styles.car_specifications_text_header}>Body Type</p>
-              <p>{capitalize(car.type)}</p>
+              <p>{car.type}</p>
             </div>
           </div>
 

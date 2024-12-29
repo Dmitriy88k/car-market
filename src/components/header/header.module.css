@@ -28,14 +28,12 @@
   display: flex;
   align-items: center;
   padding-bottom: 0.8rem;
-  
 }
 
 .auth_link {
   color: #000;
   text-decoration: none;
   margin: 0 0.5rem;
-  
 }
 
 .profile_section {
@@ -69,7 +67,6 @@
   background-color: #000;
   margin: 4px 0;
   transition: 0.4s;
-  
 }
 
 .change .bar1 {
@@ -79,7 +76,6 @@
 .change .bar2 {
   opacity: 0;
 }
-
 
 .change .bar3 {
   transform: rotate(-47deg) translate(5px, -11px);
@@ -99,7 +95,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 150px;
-  
 }
 
 .dropdown_item {
@@ -145,7 +140,6 @@
   width: 100%;
   outline: none;
   border: none;
-  
 }
 
 .dropdown_menu button:hover,
@@ -158,57 +152,51 @@
 @media (max-width: 955px) {
   .nav_links,
   .auth_links {
-    visibility: hidden; /* Make the menu invisible */
-    opacity: 0; /* Make the menu transparent */
+    visibility: hidden;
+    opacity: 0;
     width: 100%;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     padding: 25px 0;
-    height: 80vh;
+    height: 100vh;
     gap: 25px;
     margin: 0 auto;
-    position: absolute;
-    top: 7rem;
+    position: fixed;
+    top: 0;
     left: 0;
     border-top: 1px solid #eaeaea;
-    border-radius: 25px;
+    border-radius: 10px;
     background: #ff4e1f;
-    z-index: 1;
-    transform: translateY(-100%); /* Start off-screen (above) */
-    transition: transform 0.5s ease-out, opacity 0.3s ease-out, visibility 0s 0.5s; /* Smooth transition */
-  
+    z-index: 10;
+    transform: translatex(-100%);
+    transition: transform 0.9s ease-in, opacity 0.5s ease-out, visibility 0s ease-out 0.9s; 
   }
 
   .nav_links.nav_active,
   .auth_links.nav_active {
-    visibility: visible; /* Make the menu visible */
-    opacity: 1; /* Make the menu fully opaque */
-    transform: translateY(0); /* Move into view (from top to bottom) */
-    transition: transform 0.5s ease-out, opacity 0.3s ease-out, visibility 0s; /* Apply transition immediately */
+    visibility: visible;
+    opacity: 1;
+    transform: translatex(0);
+    transition: transform 0.9s ease-in, opacity 0.5s ease-out, visibility 0s; 
   }
 
   .hamburger {
     display: flex;
-    
   }
 
   .navbar {
     margin: 0 auto;
     width: 100%;
-    
   }
 
   .nav_link_item {
     margin: 1rem 0;
-
-    
+    color: rgb(139, 139, 139);
   }
 
   .auth_link {
     margin: 1rem 0;
-
-    
   }
 
   .nav_container {
@@ -216,7 +204,6 @@
     justify-content: space-between;
     width: 82%;
     margin: 0 auto;
-    
   }
 }
 
