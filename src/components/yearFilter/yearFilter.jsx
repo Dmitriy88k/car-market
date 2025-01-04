@@ -13,7 +13,7 @@ const YearFilter = ({ onFilterApply }) => {
   const [showYearFilter, setShowYearFilter] = useState(false);
   const [fromYear, setFromYear] = useState ("");
   const [toYear, setToYear] = useState("");
-  const [availableYears, setAvailableYears] = useState([]);
+
 
   const toggleYearFilter = () => {
     setShowYearFilter(!showYearFilter);
@@ -34,8 +34,6 @@ const YearFilter = ({ onFilterApply }) => {
 
         firestoreYears.add(currentYear);
 
-        const sortedYears = Array.from(firestoreYears).sort((a, b) => b - a); 
-        setAvailableYears(sortedYears);
       } catch (e) {
         console.error("error fetching years: ", e);
       }
@@ -113,7 +111,7 @@ const YearFilter = ({ onFilterApply }) => {
 };
 
 YearFilter.propTypes = {
-  onFilterApply: PropTypes.func.isRequired, // Define onFilterApply as required function
+  onFilterApply: PropTypes.func.isRequired,
 };
 
 export default YearFilter;
