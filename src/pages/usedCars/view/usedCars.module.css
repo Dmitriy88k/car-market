@@ -65,8 +65,10 @@
     padding-left: 0; 
     outline: none;
     border: none;
-    font-weight: 800;
+    font-weight: 500;
     font-size: 1.1rem;
+    color: rgb(75, 72, 72);
+    letter-spacing: 1px;;
   }
 
   .mobile_filter_button button:active, .mobile_filter_button button:focus {
@@ -88,6 +90,7 @@
     margin-left: 5px;
     position: absolute;
     top: 12px;
+
   }
 
   

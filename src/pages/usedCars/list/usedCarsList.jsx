@@ -9,9 +9,13 @@ async function getData() {
   const querySnapshot = await getDocs(collection(db, "listings"));
 
   return querySnapshot.docs.map((doc) => {
+    const data = doc.data();
     return {
       id: doc.id,
       ...doc.data(),
+      year: parseInt(data.year, 10),
+      price: parseFloat(data.price),
+      mileage: parseFloat(data.mileage),
     };
   });
 }
@@ -46,7 +50,13 @@ const UsedCarsList = ({maxPrice, maxMileage, yearRange}) => {
   return ( 
     <div className={styles.used_cars_list}>
       {filteredListings.map((listing) => (
-        <UsedCarsItem key={listing.id} listing={listing} />
+        <UsedCarsItem 
+          key={listing.id} 
+          listing={{
+            ...listing,
+            year: parseInt(listing.year, 10),
+          }}
+        />
       ))}
     </div>
   );

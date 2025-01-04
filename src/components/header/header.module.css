@@ -153,7 +153,7 @@
 @media (max-width: 955px) {
   .nav_links,
   .auth_links {
-    visibility: hidden;
+    display: none;
     opacity: 0;
     width: 100%;
     flex-direction: column;
@@ -176,7 +176,7 @@
 
   .nav_links.nav_active,
   .auth_links.nav_active {
-    visibility: visible;
+    display: flex;
     opacity: 1;
     transform: translatex(0);
     transition: transform 0.9s ease-in, opacity 0.5s ease-out, visibility 0s; 

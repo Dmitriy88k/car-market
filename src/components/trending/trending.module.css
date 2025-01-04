@@ -47,8 +47,16 @@
 }
 
 @media (max-width: 955px) {
-  .swiper-button-prev {
+  :global(.swiper-button-prev) {
     display: none !important;
+  }
+  :global(.swiper-button-next) {
+    display: none !important;
+  }
+
+  :global(.swiper-pagination-bullet) {
+    width: 28px;
+    height: 28px;
   }
 }
 

@@ -147,6 +147,7 @@ form input {
 
 .submit_button {
   border: 1px solid rgb(136, 132, 132);
+  background: white;
   color: rgb(156, 10, 156);
   width: 250px;
   font-weight: 400;
@@ -199,5 +200,14 @@ form input {
 
   .sell_car_header h1 {
     font-size: 2.1rem;
+  }
+
+  .sell_car_form_section form {
+    margin: 0 50px;;
+    width: 50%;
+  }
+  .sell_car_header img {
+    height: 280px;
+    width: 420px;
   }
 }

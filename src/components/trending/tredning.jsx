@@ -21,13 +21,13 @@ const Trending = () => {
           loop={true}
           centeredSlides={true}
           modules={[Navigation, Pagination, A11y]}
-          navigation
+          navigation={true}
           pagination={{ clickable: true }}
           breakpoints={{
-            150: { slidesPerView: 1 },
-            640: { slidesPerView: 1 },
-            992: { slidesPerView: 2, spaceBetween: 0, centeredSlides: false, },
-            1290: { slidesPerView: 3, spaceBetween: 0, centeredSlides: false, },
+            150: { slidesPerView: 1, },
+            640: { slidesPerView: 1, },
+            992: { slidesPerView: 2, spaceBetween: 0, centeredSlides: false },
+            1290: { slidesPerView: 3, spaceBetween: 0, centeredSlides: false },
           }}
         >
           <SwiperSlide className={styles.swiper_slide}>

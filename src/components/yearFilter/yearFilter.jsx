@@ -5,7 +5,8 @@ import { db } from "../../firebase";
 import PropTypes from "prop-types";
 
 const currentYear = new Date().getFullYear();
-const fullYearRange = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => currentYear - i);
+const fullYearRange = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => 1900 + i);
+const yearRange = Array.from({length: currentYear - 1900 + 1 }, (_, i) => currentYear - i);
 
 
 const YearFilter = ({ onFilterApply }) => {
@@ -25,13 +26,16 @@ const YearFilter = ({ onFilterApply }) => {
         const yearQuery = query(listingsRef);
         const querySnapshot = await getDocs(yearQuery);
 
-        const years = new Set();
+        const firestoreYears = new Set();
         querySnapshot.forEach((doc) => {
-          const year = doc.data().year;
-          if (year) years.add(year);
+          const year = parseInt(doc.data().year, 10)
+          if (!isNaN(year)) firestoreYears.add(year);
         });
-        const combinedYears = Array.from(new Set([...fullYearRange, ...years])).sort((a, b) => b - a);
-        setAvailableYears(combinedYears);
+
+        firestoreYears.add(currentYear);
+
+        const sortedYears = Array.from(firestoreYears).sort((a, b) => b - a); 
+        setAvailableYears(sortedYears);
       } catch (e) {
         console.error("error fetching years: ", e);
       }
@@ -77,7 +81,7 @@ const YearFilter = ({ onFilterApply }) => {
                 onChange={(e) => setFromYear(e.target.value)}
               >
                 <option value="">Year...</option>
-                {availableYears.map((year) => (
+                {fullYearRange.map((year) => (
                   <option key={`from-${year}`} value={year}>
                     {year}
                   </option>
@@ -91,7 +95,7 @@ const YearFilter = ({ onFilterApply }) => {
                 onChange={(e) => setToYear(e.target.value)}
               >
                 <option value="">Year...</option>
-                {availableYears.map((year) => (
+                {yearRange.map((year) => (
                   <option key={`to-${year}`} value={year}>
                     {year}
                   </option>

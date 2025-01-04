@@ -52,6 +52,11 @@
   margin: 0 auto;
 }
 
+.filter_options_form select {
+  background: white;
+  color: black;
+}
+
 .select_year {
   font-size: 1rem;
   border: 1px solid #ccc;
