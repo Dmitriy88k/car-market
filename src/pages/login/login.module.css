@@ -367,7 +367,7 @@
   .google_btn, 
   .facebook_btn, 
   .twitter_btn {
-    width: 350px;
+    width: 300px;
     
   }
 
@@ -379,7 +379,7 @@
   .google_btn button, 
   .facebook_btn button, 
   .twitter_btn button {
-    width: 350px;
+    width: 300px;
   }
 
   .login_input_title h2 {

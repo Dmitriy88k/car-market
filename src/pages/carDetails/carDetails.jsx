@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import styles from "../carDetails/carDetails.module.css";
-import Footer from "../../components/footer/footer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import GasStationImg from "../../assets/gas-station.png"
@@ -60,61 +59,105 @@ const CarDetails = () => {
 
         <h2>${car.price.toLocaleString()}</h2>
       </div>
-      <div className={styles.car_description_section}>
-          
-          <div className={styles.car_specifications}>
-            <img src={CarPrice} alt="" />
-            <div className={styles.car_specifications_text}>
-              <p className={styles.car_specifications_text_header}>Price</p>
-              <p>${car.price.toLocaleString()}</p>
+      <div className={styles.car_features}>
+        <h1>Features</h1>
+        <div className={styles.car_description_section}>
+            <div className={styles.car_specifications}>
+              <img src={CarPrice} alt="" />
+              <div className={styles.car_specifications_text}>
+                <p className={styles.car_specifications_text_header}>Price</p>
+                <p>${car.price.toLocaleString()}</p>
+              </div>
             </div>
-          </div>
-          
-          <div className={styles.car_specifications}>
-            <img src={CarMileage} alt="" />
-            <div className={styles.car_specifications_text}>
-              <p className={styles.car_specifications_text_header}>Mileage</p>
-              <p>{car.mileage.toLocaleString()}</p>
+            
+            <div className={styles.car_specifications}>
+              <img src={CarMileage} alt="" />
+              <div className={styles.car_specifications_text}>
+                <p className={styles.car_specifications_text_header}>Mileage</p>
+                <p>{car.mileage.toLocaleString()}</p>
+              </div>
             </div>
-          </div>
 
-          <div className={styles.car_specifications}>
-          <img src={CarColor} alt="" />
-            <div className={styles.car_specifications_text}>
-              <p className={styles.car_specifications_text_header}>Color</p>
+            <div className={styles.car_specifications}>
+            <img src={CarColor} alt="" />
+              <div className={styles.car_specifications_text}>
+                <p className={styles.car_specifications_text_header}>Color</p>
+                <p>{car.color}</p>
+              </div>
+            </div>
+
+            
+            <div className={styles.car_specifications}>
+            <img src={GasStationImg} alt="" />
+              <div className={styles.car_specifications_text}>
+                <p className={styles.car_specifications_text_header}>Fuel Type</p>
+                <p>{car.fuel}</p>
+              </div>
+            </div>
+
+            <div className={styles.car_specifications}>
+              <img src={Drivetrain} alt="" />
+              <div className={styles.car_specifications_text}>
+                <p className={styles.car_specifications_text_header}>Drivetrain</p>
+                <p>{car.drivetrain}</p>
+              </div>
+            </div>
+
+            <div className={styles.car_specifications}>
+            <img src={CarType} alt="" style={{ width: "35px", height: "55px" }}/>
+              <div className={styles.car_specifications_text}>
+                <p className={styles.car_specifications_text_header}>Body Type</p>
+                <p>{car.type}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+
+      <div className={styles.car_overview}>
+          <h1>Overview</h1>
+          <div className={styles.car_overview_specifications}>
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Make:</p>
+              <p>{car.make}</p>
+            </div>
+
+            <div className={styles.car_overview_text}>
+            <p className={styles.car_overview_text_header}>Model:</p>
+              <p>{car.model}</p>
+            </div>
+
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Year:</p>
+              <p>{car.year}</p>
+            </div>
+
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Body type:</p>
+              <p>{car.type}</p>
+            </div>
+
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Exterior color:</p>
               <p>{car.color}</p>
             </div>
-          </div>
 
-          
-          <div className={styles.car_specifications}>
-          <img src={GasStationImg} alt="" />
-            <div className={styles.car_specifications_text}>
-              <p className={styles.car_specifications_text_header}>Fuel Type</p>
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Mileage:</p>
+              <p>{car.mileage.toLocaleString()} <span className={styles.miles}>mi</span></p>
+            </div>
+
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Fuel type:</p>
               <p>{car.fuel}</p>
             </div>
-          </div>
 
-          <div className={styles.car_specifications}>
-            <img src={Drivetrain} alt="" />
-            <div className={styles.car_specifications_text}>
-              <p className={styles.car_specifications_text_header}>Drivetrain</p>
+            <div className={styles.car_overview_text}>
+              <p className={styles.car_overview_text_header}>Drivetrain:</p>
               <p>{car.drivetrain}</p>
             </div>
           </div>
-
-          <div className={styles.car_specifications}>
-          <img src={CarType} alt="" style={{ width: "35px", height: "55px" }}/>
-            <div className={styles.car_specifications_text}>
-              <p className={styles.car_specifications_text_header}>Body Type</p>
-              <p>{car.type}</p>
-            </div>
-          </div>
-
-
       </div>
-
-      <Footer />
     </div>
   );
 };
