@@ -5,7 +5,7 @@ import MileageFilter from "../../../components/mileageFilter/mileageFilter";
 import YearFilter from "../../../components/yearFilter/yearFilter";
 import { useState, useEffect } from "react";
 import DownImg from "../../../assets/down.png";
-import Footer from "../../../components/footer/footer";
+
 
 const UsedCars = () => {
   const [maxPrice, setMaxPrice] = useState(50000);
@@ -71,7 +71,6 @@ const UsedCars = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

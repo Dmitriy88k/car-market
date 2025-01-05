@@ -108,6 +108,7 @@ const ProfileInfo = () => {
         <span>Phone:</span> {profile?.phone || "N/A"}
       </p>
     </div>
+    
   );
 };
 

@@ -11,8 +11,6 @@ import { getProfileId } from "../../api";
 import { useProfile } from "../hooks/useProfile";
 import { useClickOutside } from "../hooks/useClickOutside";
 
-/*Test*/
-
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState();

@@ -4,9 +4,10 @@ import UsedCars from '../src/pages/usedCars/view/usedCars';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
 import SellCar from './pages/sellCar/sellCar';
-import CarDetails from './pages/carDetails/carDetails'
-import Header from '../src/components/header/header'
-import ProfileSettings from './pages/profileSettings/profileSettings'
+import CarDetails from './pages/carDetails/carDetails';
+import Header from '../src/components/header/header';
+import ProfileSettings from './pages/profileSettings/profileSettings';
+import Footer from '../src/components/footer/footer';
 import './App.css';
 import "./firebase";
 
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/profile-settings" element={<ProfileSettings/>}/>
         </Routes>
 
+        {!hideHeaderPaths.includes(location.pathname) && <Footer/>}
       </div>
   )
 }

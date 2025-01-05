@@ -65,7 +65,6 @@ form {
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  margin-bottom: 120px;
 }
 
 .sell_car_section img {
@@ -203,11 +202,20 @@ form input {
   }
 
   .sell_car_form_section form {
-    margin: 0 50px;;
+    margin: 0 auto 120px auto;
     width: 50%;
   }
   .sell_car_header img {
-    height: 280px;
-    width: 420px;
+    height: 220px;
+    width: 360px;
+    top: 70px;
+  }
+
+  form input {
+    width: 300px;
+  }
+
+  .select {
+    width: 300px;
   }
 }

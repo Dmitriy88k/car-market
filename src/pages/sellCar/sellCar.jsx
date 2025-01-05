@@ -318,8 +318,6 @@ const SellCar = () => {
           
         </form>
       </div>
-
-      <Footer />
     </div>
   );
 };
