@@ -74,8 +74,7 @@ const Header = () => {
           <div className={`${styles.bar} ${styles.bar2}`}></div>
           <div className={`${styles.bar} ${styles.bar3}`}></div>
         </div>
-        <ul
-          className={`${styles.nav_links} ${menuOpen ? styles.nav_active : ""}`}
+        <ul className={`${styles.nav_links} ${menuOpen ? styles.nav_active : ""}`}
         >
            {menuOpen && (
     <button className={styles.close_button} onClick={toggleMenu}>
@@ -86,6 +85,21 @@ const Header = () => {
           <MyLink name="Used Cars" link="/used-cars"  />
           <MyLink name="Sell Car" link="/sell-car" />
           <MyLink name="Contact Us" link="/contact-us" />
+
+          <div className={styles.auth_links_mobile}>
+            {!isAuthenticated && (
+              <>
+                <MyLink name="Log In" link="/login"/>
+                <MyLink name="Sign Up" link="/signup"/>
+              </>
+            )}
+            {isAuthenticated && (
+              <li onClick={handleLogout}>
+                <a href="#"  className={styles.mobile_logout} >Log Out</a>
+              </li>
+            )}
+          </div>
+
         </ul>
       </div>
 
