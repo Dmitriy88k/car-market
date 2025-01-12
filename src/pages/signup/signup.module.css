@@ -308,14 +308,14 @@
 @media (max-width: 620px) {
   .signup_input_title,
   .signup_form {
-    width: 350px;
+    width: 300px;
   }
 
   .signup_input_title h2,
   .signup_input_title p,
   .signup_form input,
   .signup_form button {
-    width: 350px;
+    width: 300px;
   }
 
   .signup_input_title h2 {

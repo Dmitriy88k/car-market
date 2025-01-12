@@ -5,6 +5,7 @@ import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
 import SellCar from './pages/sellCar/sellCar';
 import CarDetails from './pages/carDetails/carDetails';
+import ContactUs from './pages/contactUs/contactUs';
 import Header from '../src/components/header/header';
 import ProfileSettings from './pages/profileSettings/profileSettings';
 import Footer from '../src/components/footer/footer';
@@ -30,6 +31,8 @@ const App = () => {
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/car-details/:id" element={<CarDetails/>}/>
           <Route path="/profile-settings" element={<ProfileSettings/>}/>
+          <Route path="/contact-us" element={<ContactUs/>}/>
+
         </Routes>
 
         {!hideHeaderPaths.includes(location.pathname) && <Footer/>}

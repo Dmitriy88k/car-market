@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import styles from "../sellCar/sellCar.module.css";
 import Malibu from "../../assets/chevrolet_malibu.png";
 import Cloud from "../../assets/cloud.png";
-import Footer from "../../components/footer/footer";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
