@@ -5,6 +5,7 @@ import { useState } from "react";
 import DefaultAvatarPicture from "../../assets/default-avatar-picture.webp";
 import styles from "../signup/signup.module.css";
 import IconImg from "../../assets/logo.png";
+
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -60,6 +61,7 @@ const Signup = () => {
   return (
     <div className={styles.signup_page}>
       <div className={styles.signup_left_side}>
+        
         <div className={styles.signup_left_header}>
           <h1>Sell Your Car Fast and Safe</h1>
         </div>
@@ -70,6 +72,7 @@ const Signup = () => {
           <div className={styles.signup_left_bottom_button}>
             <Link to="/login">
               <button>Sign In</button>
+              
             </Link>
           </div>
         </div>

@@ -247,6 +247,11 @@
     color: black;
     text-transform: none;
     text-align: center;
+    margin-right: 2rem;
+  }
+
+  .mobile_logout:hover {
+    color: black;
   }
   
 

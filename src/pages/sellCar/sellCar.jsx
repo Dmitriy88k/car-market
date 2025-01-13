@@ -6,8 +6,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useNavigate} from "react-router-dom";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const vehicleOptions = [
   { value: "", label: "Vehicle type" },
@@ -22,8 +22,23 @@ const vehicleOptions = [
   { value: "wagon", label: "Wagon" },
 ];
 
-const currentYear = new Date().getFullYear();
+const fuelOptions = [
+  { value: "", label: "Fuel type" },
+  { value: "gasoline", label: "Gasoline"},
+  { value: "diesel", label: "Diesel"},
+  { value: "hybrid", label: "Hybrid"},
+  { value: "electric", label: "Electric"},
+]
 
+const driveTrainOptions = [
+  {value: "", label: "Drivetrain"},
+  {value: "Front-Wheel Drive (FWD)", label: "Front-Wheel Drive (FWD)"},
+  {value: "Rear-Wheel Drive (RWD)", label: "Rear-Wheel Drive (RWD)"},
+  {value: "All-Wheel Drive (AWD)", label: "All-Wheel Drive (AWD)"},
+  {value: "Four-Wheel Drive (4WD)", label: "Four-Wheel Drive (4WD)"},
+]
+
+const currentYear = new Date().getFullYear();
 
 const vehicleYear = [];
 for (let year = currentYear; year >= 1900; year--) {
@@ -38,19 +53,22 @@ const SellCar = () => {
   const [carMileage, setCarMileage] = useState("");
   const [carPrice, setCarPrice] = useState("");
   const [carImages, setCarImages] = useState([]);
-  const [imagePreviews, setImagePreviews] = useState([]); 
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [carColor, setCarColor] = useState("");
   const fileInputRef = useRef(null);
+  const [fuelType, setFuelType] = useState([]);
+  const [driveTrain, setDriveTrain] = useState([]);
 
   const navigate = useNavigate();
 
-  useEffect(()=> {
-    const auth= getAuth();
-    onAuthStateChanged(auth, (user)=> {
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
-    })
+    });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -82,6 +100,9 @@ const SellCar = () => {
         mileage: numericMileage,
         price: numericPrice,
         images: imageUrls,
+        color: carColor,
+        fuel: fuelType,
+        drivetrain: driveTrain,
       });
       console.log("Document written with ID: ", docRef.id);
 
@@ -95,11 +116,13 @@ const SellCar = () => {
       setIsSubmitted(true);
       setCarImages([]);
       setImagePreviews([]);
+      setCarColor("");
+      setFuelType([]);
+      setDriveTrain([]);
 
       if (fileInputRef.current) {
         fileInputRef.current.value = null;
       }
-
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -126,7 +149,7 @@ const SellCar = () => {
       setCarMileage("");
     } else {
       const numericValue = Number(mileageValue);
-      const formattedMileage = numericValue.toLocaleString('en-US');
+      const formattedMileage = numericValue.toLocaleString("en-US");
       setCarMileage(formattedMileage);
     }
   };
@@ -142,7 +165,7 @@ const SellCar = () => {
 
     setCarImages((prevImages) => [...prevImages, ...files]);
 
-    const newPreviews = files.map(file => {
+    const newPreviews = files.map((file) => {
       const reader = new FileReader();
       return new Promise((resolve) => {
         reader.onload = (event) => resolve(event.target.result);
@@ -188,46 +211,20 @@ const SellCar = () => {
       <div className={styles.sell_car_form_section}>
         {isSubmitted && (
           <div className={styles.success_submit_message}>
-            
-              <div className={styles.success_message}>
-                <h1>Successfully submitted</h1>
-                <button className={styles.ok_button} onClick={handleOkClick}>
-                  OK
-                </button>
-              </div>
+            <div className={styles.success_message}>
+              <h1>Successfully submitted</h1>
+              <button className={styles.ok_button} onClick={handleOkClick}>
+                OK
+              </button>
+            </div>
           </div>
         )}
-        {!isLoggedIn && <p className={styles.login_prompt}>Please log in to submit a listing.</p>}
+        {!isLoggedIn && (
+          <p className={styles.login_prompt}>
+            Please log in to submit a listing.
+          </p>
+        )}
         <form onSubmit={handleSubmit}>
-          <select
-            className={styles.select}
-            value={carType}
-            onChange={(e) => setCarType(e.target.value)}
-            required
-            disabled={!isLoggedIn}
-          >
-            {vehicleOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-
-          <select
-            className={styles.select}
-            value={carYear}
-            onChange={(e) => setCarYear(e.target.value)}
-            required
-            disabled={!isLoggedIn}
-          >
-            <option value="">Year</option>
-            {vehicleYear.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-
           <input
             type="text"
             placeholder="Make"
@@ -245,6 +242,72 @@ const SellCar = () => {
             required
             disabled={!isLoggedIn}
           />
+
+          <select
+            className={styles.select}
+            value={carYear}
+            onChange={(e) => setCarYear(e.target.value)}
+            required
+            disabled={!isLoggedIn}
+          >
+            <option value="">Year</option>
+            {vehicleYear.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+
+          <select
+            className={styles.select}
+            value={carType}
+            onChange={(e) => setCarType(e.target.value)}
+            required
+            disabled={!isLoggedIn}
+          >
+            {vehicleOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+
+          <input
+            type="text"
+            placeholder="Exterior Color"
+            value={carColor}
+            onChange={(e) => setCarColor(e.target.value)}
+            required
+            disabled={!isLoggedIn}
+          />
+
+          <select
+            className={styles.select}
+            value={fuelType}
+            onChange={(e) => setFuelType(e.target.value)}
+            required
+            disabled={!isLoggedIn}
+          >
+            {fuelOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+
+          <select
+            className={styles.select}
+            value={driveTrain}
+            onChange={(e) => setDriveTrain(e.target.value)}
+            required
+            disabled={!isLoggedIn}
+          >
+            {driveTrainOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
 
           <input
             type="text"
@@ -266,19 +329,33 @@ const SellCar = () => {
 
           <div>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="droppable" direction="horizontal" >
+              <Droppable droppableId="droppable" direction="horizontal">
                 {(provided) => (
-                  <div {...provided.droppableProps} ref={provided.innerRef} className={styles.image_previews}>
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className={styles.image_previews}
+                  >
                     {carImages.map((image, index) => (
-                      <Draggable key={index} draggableId={index.toString()} index={index}>
+                      <Draggable
+                        key={index}
+                        draggableId={index.toString()}
+                        index={index}
+                      >
                         {(provided) => (
                           <div
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            
                           >
-                            <p className={styles.image_name}> <img className={styles.preview_images}src={imagePreviews[index]} alt=""/></p>
+                            <p className={styles.image_name}>
+                              {" "}
+                              <img
+                                className={styles.preview_images}
+                                src={imagePreviews[index]}
+                                alt=""
+                              />
+                            </p>
                           </div>
                         )}
                       </Draggable>
@@ -308,13 +385,18 @@ const SellCar = () => {
             style={{ display: "none" }}
             disabled={!isLoggedIn}
           />
-          
-          {errors.image && <p className={styles.error_message}>{errors.image}</p>}
 
-          <button type="submit" className={styles.submit_button} disabled={!isLoggedIn}>
+          {errors.image && (
+            <p className={styles.error_message}>{errors.image}</p>
+          )}
+
+          <button
+            type="submit"
+            className={styles.submit_button}
+            disabled={!isLoggedIn}
+          >
             Submit
           </button>
-          
         </form>
       </div>
     </div>

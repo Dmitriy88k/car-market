@@ -94,9 +94,13 @@ const Header = () => {
               </>
             )}
             {isAuthenticated && (
-              <li onClick={handleLogout}>
-                <a href="#"  className={styles.mobile_logout} >Log Out</a>
-              </li>
+              <>
+                <MyLink name="Profile" link="/profile-settings"></MyLink>
+                <li onClick={handleLogout}>
+                  <a href="#"  className={styles.mobile_logout} >Log Out</a>
+                </li>
+              </>
+              
             )}
           </div>
 
