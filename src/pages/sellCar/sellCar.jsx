@@ -71,6 +71,19 @@ const SellCar = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (isSubmitted) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [isSubmitted]);
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -212,13 +225,21 @@ const SellCar = () => {
         {isSubmitted && (
           <div className={styles.success_submit_message}>
             <div className={styles.success_message}>
-              <h1>Successfully submitted</h1>
+              <h1>Congratulations!</h1>
+              <h5>Your car listing has been successfully submitted</h5>
               <button className={styles.ok_button} onClick={handleOkClick}>
-                OK
+                Continue
               </button>
             </div>
           </div>
         )}
+        {/* <button
+  type="button"
+  onClick={() => setIsSubmitted(true)}
+  style={{ margin: "20px", padding: "10px", background: "#007BFF", color: "#fff", border: "none", borderRadius: "5px" }}
+>
+  Simulate Submission
+</button> */}
         {!isLoggedIn && (
           <p className={styles.login_prompt}>
             Please log in to submit a listing.
