@@ -16,6 +16,13 @@
   padding: 20px;
 }
 
+.seller_description {
+  width: 80%;
+  margin: 50px auto;
+  box-shadow: 2px 5px 12px 12px #2828281a, 0 6px 20px rgba(255, 255, 255, 0.1);
+  padding: 20px;
+}
+
 .car_overview h1 {
   margin-bottom: 15px;
 }
@@ -118,6 +125,17 @@
 :global(.carousel .thumb img) {
   height: 60px;
 }
+
+.seller_description h1 {
+  margin-bottom: 15px;
+}
+
+.seller_description p {
+  line-height: 35px;
+  font-weight: bold;
+}
+
+
 
 @media screen and (max-width: 1024px) {
   .car_details_section {

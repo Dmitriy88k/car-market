@@ -61,6 +61,7 @@ const SellCar = () => {
   const fileInputRef = useRef(null);
   const [fuelType, setFuelType] = useState([]);
   const [driveTrain, setDriveTrain] = useState([]);
+  const [sellerText, setSellerText] = useState("");
 
   const navigate = useNavigate();
 
@@ -116,6 +117,7 @@ const SellCar = () => {
         color: carColor,
         fuel: fuelType,
         drivetrain: driveTrain,
+        sellerText: sellerText,
       });
       console.log("Document written with ID: ", docRef.id);
 
@@ -132,6 +134,7 @@ const SellCar = () => {
       setCarColor("");
       setFuelType([]);
       setDriveTrain([]);
+      setSellerText("");
 
       if (fileInputRef.current) {
         fileInputRef.current.value = null;
@@ -295,7 +298,7 @@ const SellCar = () => {
 
           <input
             type="text"
-            placeholder="Exterior Color"
+            placeholder="Exterior color"
             value={carColor}
             onChange={(e) => setCarColor(e.target.value)}
             required
@@ -344,6 +347,16 @@ const SellCar = () => {
             placeholder="Price"
             value={carPrice}
             onChange={handlePriceChange}
+            required
+            disabled={!isLoggedIn}
+          />
+          
+
+          <textarea
+            placeholder="Seller's description"
+            className={styles.sellers_description_input}
+            value={sellerText}
+            onChange={(e) => setSellerText(e.target.value)}
             required
             disabled={!isLoggedIn}
           />

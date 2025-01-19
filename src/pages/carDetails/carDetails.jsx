@@ -96,15 +96,7 @@ const CarDetails = () => {
             </div>
 
             <div className={styles.car_specifications}>
-              <img src={Drivetrain} alt="" />
-              <div className={styles.car_specifications_text}>
-                <p className={styles.car_specifications_text_header}>Drivetrain</p>
-                <p>{car.drivetrain}</p>
-              </div>
-            </div>
-
-            <div className={styles.car_specifications}>
-            <img src={CarType} alt="" style={{ width: "35px", height: "55px" }}/>
+            <img src={CarType} alt="" style={{ width: "60px", height: "70px" }}/>
               <div className={styles.car_specifications_text}>
                 <p className={styles.car_specifications_text_header}>Body Type</p>
                 <p>{car.type}</p>
@@ -157,6 +149,11 @@ const CarDetails = () => {
               <p>{car.drivetrain}</p>
             </div>
           </div>
+      </div>
+
+      <div className={styles.seller_description}>
+        <h1>Seller's description</h1>
+        <p>{car.sellerText}</p>
       </div>
     </div>
   );
