@@ -42,10 +42,15 @@
   transform: ease 2s;
 }
 
+.media_icons {
+  
+  display: flex;
+  gap:20px;
+}
+
 .media_icons img {
   width: 30px;
   height: 30px;
-  margin-right: 1.2rem;
   transition: transform 0.11s ease-in-out;
 }
 

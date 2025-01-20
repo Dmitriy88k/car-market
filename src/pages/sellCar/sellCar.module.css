@@ -221,6 +221,11 @@ form input {
     width: 70px;
     height: 7vh;
   }  
+
+  .success_message {
+    width: 80%;
+    height: 40vh;
+  }
  
 }
 

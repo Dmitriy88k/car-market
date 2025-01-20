@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "../login/login.module.css";
 import IconImg from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/header/header";
 
 
 const auth = getAuth(app);
@@ -22,8 +23,7 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        //save accessToken to LocalStorage and then redirect to the right page
-        //TO-DO REFRESH TOKEN???
+     
 
         const user = userCredential.user;
         console.log(user);
@@ -47,7 +47,9 @@ const Login = () => {
   });
 
   return (
-    <div className={styles.login_page}>
+    <div>
+      <Header/>
+      <div className={styles.login_page}>
       <div className={styles.login_left_side}>
         <div className={styles.login_left_header}>
           <h1>A new way to buy and sell cars</h1>
@@ -102,6 +104,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

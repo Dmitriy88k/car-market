@@ -236,13 +236,7 @@ const SellCar = () => {
             </div>
           </div>
         )}
-        {/* <button
-  type="button"
-  onClick={() => setIsSubmitted(true)}
-  style={{ margin: "20px", padding: "10px", background: "#007BFF", color: "#fff", border: "none", borderRadius: "5px" }}
->
-  Simulate Submission
-</button> */}
+        
         {!isLoggedIn && (
           <p className={styles.login_prompt}>
             Please log in to submit a listing.
