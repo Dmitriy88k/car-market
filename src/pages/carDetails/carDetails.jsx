@@ -10,7 +10,6 @@ import CarType from "../../assets/car.png"
 import CarMileage from "../../assets/speed.png"
 import CarColor from "../../assets/drawing.png"
 import CarPrice from "../../assets/price-tag.png"
-import Drivetrain from "../../assets/drivetrain.png"
 
 const CarDetails = () => {
   const { id } = useParams();
