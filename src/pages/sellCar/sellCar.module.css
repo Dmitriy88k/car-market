@@ -226,6 +226,13 @@ form input {
     width: 80%;
     height: 40vh;
   }
+
+  .upload_button {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
  
 }
 
