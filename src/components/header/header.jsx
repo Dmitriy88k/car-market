@@ -64,7 +64,9 @@ const Header = () => {
     <nav className={styles.navbar}>
       <div className={styles.nav_container} >
         <div className={styles.logo}>
-          <img src={IconImg} alt="logo" />
+          <Link to="/">
+            <img src={IconImg} alt="logo" />
+          </Link>
         </div>
         <div
           className={`${styles.hamburger} ${menuOpen ? styles.change : ""}`}
